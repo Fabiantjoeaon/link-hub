@@ -1,7 +1,6 @@
 'use strict';
 const path = require('path');
 const webpack = require('webpack');
-const WriteFilePlugin = require('write-file-webpack-plugin');
 const SRC_DIR = path.resolve(__dirname, './src');
 const DIST_DIR = path.resolve(__dirname, './dist');
 const STATIC_DIR = path.resolve(__dirname, './static');
@@ -32,11 +31,5 @@ module.exports = {
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new (webpack.optimize.OccurenceOrderPlugin || webpack.optimize.OccurrenceOrderPlugin)()
-    ],
-    // resolve: {
-    //     modulesDirectories: ['src', 'node_modules']
-    // }
-    // plugins: [
-    //     new WriteFilePlugin()
-    // ]
+    ]
 };

@@ -21,7 +21,6 @@ app.get('/*', (req, res) => {
 });
 
 app.listen(port, error => {
-    /* eslint-disable no-console */
     if (error) {
         console.error(error);
     } else {
@@ -32,4 +31,3 @@ app.listen(port, error => {
         );
     }
 });
-/* eslint-enable no-console */
