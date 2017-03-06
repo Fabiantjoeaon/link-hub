@@ -1,4 +1,5 @@
 import {combineReducers} from 'redux';
+import {ADD_LINK} from '../actions/constants';
 
 const linkReducer = (state = {}, action) => {
     switch(action.type) {
@@ -17,7 +18,7 @@ const linkReducer = (state = {}, action) => {
 }
 
 const rootReducer = combineReducers({
-    linkReducer
+    links: linkReducer
 });
 
 export default rootReducer;
