@@ -1,24 +1,12 @@
+import linksReducer from './linksReducer';
+import groupsReducer from './groupsReducer';
 import {combineReducers} from 'redux';
-import {ADD_LINK} from '../actions/constants';
 
-const linkReducer = (state = {}, action) => {
-    switch(action.type) {
-        case ADD_LINK:
-            return [
-                ...state,
-                {
-                    id: action.id,
-                    url: action.url,
-                    description: action.description
-                }
-            ];
-        default:
-            return state;
-    }
-}
+//TODO: create selectors
 
 const rootReducer = combineReducers({
-    links: linkReducer
+    groups: groupsReducer,
+    links: linksReducer
 });
 
 export default rootReducer;
