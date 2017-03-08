@@ -14,4 +14,9 @@ export const addGroup = (name, color) => ({
     id: v4(),
     name,
     color
-})
+});
+
+export const changeBackgroundColor = (color) => ({
+    type: actionTypes.CHANGE_DASHBOARD_BACKGROUND_COLOR,
+    color: color
+});

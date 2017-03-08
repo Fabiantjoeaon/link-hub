@@ -13,7 +13,7 @@ app.use(webpackDevMiddleware(compiler, {
     noInfo: true,
     publicPath: config.output.publicPath,
 }));
-app.use(Express.static('static'));
+app.use(Express.static(path.join(__dirname, 'static')));
 app.use(webpackHotMiddleware(compiler))
 
 app.get('/*', (req, res) => {

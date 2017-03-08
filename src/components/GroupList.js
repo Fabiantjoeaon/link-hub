@@ -10,12 +10,13 @@ const StyledGroupList = styled.div`
     justify-content: space-between;
 `;
 
-const GroupList = ({ groups, links }) => (
+const GroupList = ({ groups, links, ...props}) => (
     <div>
         {groups.map(group =>
             <Group
                 key={group.id}
-                {...group} />
+                {...group}
+                {...props} />
         )}
     </div>
 );
