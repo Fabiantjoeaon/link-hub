@@ -16,4 +16,6 @@ const groupsReducer = (state = [], action) => {
     }
 }
 
+export const getGroups = (state) => state.groups;
+
 export default groupsReducer;

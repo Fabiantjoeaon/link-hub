@@ -10,4 +10,6 @@ const backgroundColorReducer = (state = 'f2f2f2', action) => {
     }
 }
 
+export const getBackgroundColor = (state) => state.backgroundColor;
+
 export default backgroundColorReducer;

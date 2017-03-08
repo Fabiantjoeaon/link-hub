@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
+import {getBackgroundColor} from '../reducers/backgroundColorReducer';
 import LinksContainer from '../containers/LinksContainer';
 
 const StyledDashboard = styled.div`
@@ -17,7 +18,7 @@ const _Dashboard_ = ({backgroundColor}) => (
 );
 
 const mapStateToProps = (state) => ({
-    backgroundColor: state.backgroundColor
+    backgroundColor: getBackgroundColor(state)
 });
 
 const Dashboard = connect(

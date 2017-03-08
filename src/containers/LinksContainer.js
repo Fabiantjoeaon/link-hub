@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import * as actions from '../actions';
 import styled from 'styled-components';
-import GroupList from '../components/GroupList';
 import _ from 'lodash';
+
+import * as actions from '../actions';
+import {getGroups} from '../reducers/groupsReducer';
+import GroupList from '../components/GroupList';
+
 
 const StyledLinksComponent = styled.section`
     height: 100%;
@@ -19,11 +22,17 @@ class _LinksContainer_ extends Component {
     }
 
     componentDidMount() {
-        this.props.addGroup('name1', 'EDC7C2');
-        this.props.addGroup('name2', 'F3EFE0');
-        this.props.addGroup('name3', 'DDFFD9');
-        this.props.addGroup('name4', 'B7B7B7');
-        this.props.addGroup('name5', 'C0D8E0');
+        this.props.addGroup('group1', 'B1B7D1');
+        this.props.addGroup('group2', 'FFC15E');
+        this.props.addGroup('group3', '187795');
+        this.props.addGroup('group4', 'F4ACB7');
+        this.props.addGroup('group5', 'EC4E20');
+
+        this.props.addLink('link11', 'desc');
+        this.props.addLink('link2', 'desc');
+        this.props.addLink('link3', 'desc', 'group2');
+        this.props.addLink('link4', 'desc', 'group3');
+        this.props.addLink('link55', 'desc');
     }
 
     _onGroupMouseEnterHandler(color) {
@@ -47,8 +56,7 @@ class _LinksContainer_ extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    groups: state.groups,
-    links: state.links
+    groups: getGroups(state)
 });
 
 const LinksContainer = connect(

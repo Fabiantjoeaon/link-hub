@@ -17,6 +17,6 @@ const linksReducer = (state = [], action) => {
     }
 }
 
-export const getLinkByGroup = (state) => state.group;
+export const getLinksByGroup = (state, group) => state.links.filter(f => f.group);
 
 export default linksReducer;
