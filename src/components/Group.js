@@ -1,6 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+import {connect} from 'react-redux';
 import {DropTarget} from 'react-dnd';
+
+import GroupLinksList from './GroupLinksList';
+import {getLinksByGroup} from '../reducers/linksReducer';
 
 const StyledGroup = styled.div`
     width: calc(100% / 4);
@@ -31,9 +35,10 @@ const StyledGroup = styled.div`
     }
 `;
 
-const Group = ({
+const _Group_ = ({
     name,
     color,
+    links,
     onGroupMouseEnterHandler,
     onGroupMouseLeaveHandler
 }) => (
@@ -42,7 +47,19 @@ const Group = ({
         onMouseLeave={() => {onGroupMouseLeaveHandler()}}
         color={color}>
         <h1>{name}</h1>
+        <GroupLinksList links={links} />
     </StyledGroup>
 );
+
+const mapStateToProps = (state, ownProps) => {
+    console.log(ownProps.name)
+    return {
+        links: getLinksByGroup(state, ownProps.name)
+    }
+};
+
+const Group = connect(
+    mapStateToProps
+)(_Group_);
 
 export default Group;
