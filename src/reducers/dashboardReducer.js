@@ -1,6 +1,7 @@
 import {
     CHANGE_DASHBOARD_BACKGROUND_COLOR,
-    TOGGLE_DASHBOARD_BOTTOM_PANEL_VISIBILITY} from '../actions/constants';
+    TOGGLE_DASHBOARD_BOTTOM_PANEL_VISIBILITY
+} from '../actions/constants';
 import {combineReducers} from 'redux';
 
 const backgroundColorReducer = (state = 'f2f2f2', action) => {
@@ -14,7 +15,7 @@ const backgroundColorReducer = (state = 'f2f2f2', action) => {
 
 export const getBackgroundColor = (state) => state.dashboard.backgroundColor;
 
-const BottomPanelVisibilityReducer = (state = false, action) => {
+const bottomPanelVisibilityReducer = (state = false, action) => {
     switch (action.type) {
         case TOGGLE_DASHBOARD_BOTTOM_PANEL_VISIBILITY:
             return !state.isBottomPanelVisible;
@@ -27,7 +28,7 @@ export const getIsBottomPanelVisible = (state) => state.dashboard.isBottomPanelV
 
 const dashboardReducer = combineReducers({
     backgroundColor: backgroundColorReducer,
-    isBottomPanelVisible: BottomPanelVisibilityReducer
+    isBottomPanelVisible: bottomPanelVisibilityReducer
 });
 
 export default dashboardReducer;

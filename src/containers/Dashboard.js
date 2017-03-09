@@ -9,6 +9,7 @@ import BottomPanel from './BottomPanel';
 const StyledDashboard = styled.div`
     width: 100vw;
     height: auto;
+    max-height: 100vh;
     background-color: #${props => props.backgroundColor};
     transition: all 0.3s ease-out;
 `;

@@ -1,17 +1,21 @@
 import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
 import {getIsBottomPanelVisible} from '../reducers/dashboardReducer';
 import styled from 'styled-components';
 
 const StyledBottomPanel = styled.section`
     width: 100%;
-    height: 25%;
+    height: 500px;
     background-color: #f2f2f2;
     position: absolute;
     bottom:0;
     right:0;
-    
-    display: ${props => props.visible ? 'block' : 'none'};
+    z-index: 2;
+    transition: all 0.5s 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    display: ${props => props.visible ? 'visible' : 'hidden'};
+    transform: ${props => props.visible ? 'translateY(0px)' : 'translateY(500px)'};
+    will-change: transform;
 `;
 
 class _BottomPanel_ extends Component {
@@ -22,7 +26,9 @@ class _BottomPanel_ extends Component {
     render() {
         const {isBottomPanelVisible} = this.props;
         return (
-            <StyledBottomPanel visible={isBottomPanelVisible} />
+            <StyledBottomPanel
+                visible={isBottomPanelVisible}>
+            </StyledBottomPanel>
         )
     }
 };

@@ -1,8 +1,9 @@
 import React from 'react';
 import {Provider} from 'react-redux';
-import {Router, Route, useRouterHistory} from 'react-router';
+import {IndexRoute, Router, Route, useRouterHistory} from 'react-router';
 import createBrowserHistory from 'react-router/node_modules/history/lib/createBrowserHistory';
 import Dashboard from './Dashboard';
+import AddLinkPanel from './AddLinkPanel';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { DragDropContext } from 'react-dnd';
 
@@ -15,7 +16,10 @@ const Root = ({store}) => (
     <Provider
         store={store}>
         <Router history={browserHistory}>
-            <Route path="/" component={Dashboard}/>
+            <Route path="/" component={Dashboard}>
+                <Route path="/add_link" component={AddLinkPanel}/>
+            </Route>
+
         </Router>
     </Provider>
 )
