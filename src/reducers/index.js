@@ -2,10 +2,10 @@ import linksReducer from './linksReducer';
 import groupsReducer from './groupsReducer';
 import dashboardReducer from './dashboardReducer';
 import {combineReducers} from 'redux';
-import {routerStateReducer} from 'redux-router';
+import {routerReducer} from 'react-router-redux'
 
 const rootReducer = combineReducers({
-    router: routerStateReducer,
+    routing: routerReducer,
     groups: groupsReducer,
     links: linksReducer,
     dashboard: dashboardReducer

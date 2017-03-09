@@ -24,19 +24,19 @@ class _Toolbar_ extends Component {
     }
 
     render() {
-        const {onToolbarIconClick, isBottomPanelVisible} = this.props;
+        const {onToolbarIconClick, isBottomPanelVisible, path} = this.props;
         return (
             <StyledToolbar>
                 <ToolbarIcon
                     onToolbarIconClick={onToolbarIconClick}
-                    action='Add link'
+                    action={path}
                     isBottomPanelVisible={isBottomPanelVisible} />
             </StyledToolbar>
         )
     }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state, ownProps) => ({
     isBottomPanelVisible: getIsBottomPanelVisible(state)
 });
 

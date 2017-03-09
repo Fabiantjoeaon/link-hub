@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Link} from 'react-router';
 
-const StyledToolbarIcon = styled(Link)`
+const StyledToolbarIcon = styled.div`
     width: 75px;
     height: 75px;
     background-color: #525252; 
@@ -29,7 +28,6 @@ const ToolbarIcon = ({
             onToolbarIconClick()
         }}
         visible={isBottomPanelVisible}
-        to='add_link'
     >
         <p>{action}</p>
     </StyledToolbarIcon>

@@ -1,21 +1,15 @@
 import React from 'react';
 import {Provider} from 'react-redux';
-import {IndexRoute, Router, Route, useRouterHistory} from 'react-router';
-import createBrowserHistory from 'react-router/node_modules/history/lib/createBrowserHistory';
+import {IndexRoute, Router, Route} from 'react-router';
+
 import Dashboard from './Dashboard';
 import AddLinkPanel from './AddLinkPanel';
-import HTML5Backend from 'react-dnd-html5-backend';
-import { DragDropContext } from 'react-dnd';
-
-const browserHistory = useRouterHistory(createBrowserHistory)({
-   basename: '/'
-});
 
 //TODO: Maybe a /:cat filter?
-const Root = ({store}) => (
+const Root = ({store, history}) => (
     <Provider
         store={store}>
-        <Router history={browserHistory}>
+        <Router history={history}>
             <Route path="/" component={Dashboard}>
                 <Route path="/add_link" component={AddLinkPanel}/>
             </Route>
@@ -24,4 +18,4 @@ const Root = ({store}) => (
     </Provider>
 )
 
-export default DragDropContext(HTML5Backend)(Root);
+export default Root;
