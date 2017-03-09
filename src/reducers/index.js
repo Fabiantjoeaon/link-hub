@@ -1,14 +1,12 @@
 import linksReducer from './linksReducer';
 import groupsReducer from './groupsReducer';
-import backgroundColorReducer from './backgroundColorReducer';
+import dashboardReducer from './dashboardReducer';
 import {combineReducers} from 'redux';
-
-//TODO: create selectors
 
 const rootReducer = combineReducers({
     groups: groupsReducer,
     links: linksReducer,
-    backgroundColor: backgroundColorReducer
+    dashboard: dashboardReducer
 });
 
 export default rootReducer;

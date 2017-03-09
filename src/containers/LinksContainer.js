@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
-import _ from 'lodash';
+import bindAll from 'lodash/bindAll';
 
 import * as actions from '../actions';
 import {getGroups} from '../reducers/groupsReducer';
@@ -18,7 +18,7 @@ class _LinksContainer_ extends Component {
     constructor(props) {
         super(props);
 
-        _.bindAll(this, '_onGroupMouseEnterHandler', '_onGroupMouseLeaveHandler');
+        bindAll(this, '_onGroupMouseEnterHandler', '_onGroupMouseLeaveHandler');
     }
 
     componentDidMount() {

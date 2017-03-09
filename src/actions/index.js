@@ -16,7 +16,11 @@ export const addGroup = (name, color) => ({
     color
 });
 
-export const changeBackgroundColor = (color) => ({
+export const changeBackgroundColor = (backgroundColor) => ({
     type: actionTypes.CHANGE_DASHBOARD_BACKGROUND_COLOR,
-    color: color
+    backgroundColor
+});
+
+export const toggleBottomPanelVisibility = () => ({
+    type: actionTypes.TOGGLE_DASHBOARD_BOTTOM_PANEL_VISIBILITY
 });

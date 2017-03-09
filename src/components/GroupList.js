@@ -1,24 +1,23 @@
 import React from 'react';
-import Group from './Group';
+import Group from '../containers/Group';
 import styled from 'styled-components';
 
 const StyledGroupList = styled.div`
     width: 100%;
-    height: 100%;
     display: flex;
-    flex-direction: row wrap;
-    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: wrap;
 `;
 
 const GroupList = ({ groups, links, ...props}) => (
-    <div>
+    <StyledGroupList>
         {groups.map(group =>
             <Group
                 key={group.id}
                 {...group}
                 {...props} />
         )}
-    </div>
+    </StyledGroupList>
 );
 
 export default GroupList;
