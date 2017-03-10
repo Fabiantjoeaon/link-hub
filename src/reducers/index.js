@@ -6,9 +6,9 @@ import {routerReducer} from 'react-router-redux'
 
 const rootReducer = combineReducers({
     routing: routerReducer,
+    dashboard: dashboardReducer,
     groups: groupsReducer,
-    links: linksReducer,
-    dashboard: dashboardReducer
+    links: linksReducer
 });
 
 export default rootReducer;

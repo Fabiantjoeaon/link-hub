@@ -13,7 +13,6 @@ const Root = ({store, history}) => (
             <Route path="/" component={Dashboard}>
                 <Route path="/add_link" component={AddLinkPanel}/>
             </Route>
-
         </Router>
     </Provider>
 )

@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
 import {getIsBottomPanelVisible} from '../reducers/dashboardReducer';
 import styled from 'styled-components';
+import {Router, Route} from 'react-router';
+import {history} from '../index';
+import AddLinkPanel from './AddLinkPanel';
 
 const StyledBottomPanel = styled.section`
     width: 100%;
@@ -28,6 +31,9 @@ class _BottomPanel_ extends Component {
         return (
             <StyledBottomPanel
                 visible={isBottomPanelVisible}>
+                <Router history={history}>
+                    <Route path='/add_link' component={AddLinkPanel}/>
+                </Router>
             </StyledBottomPanel>
         )
     }

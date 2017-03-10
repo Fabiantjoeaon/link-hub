@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {push} from 'react-router-redux';
 import styled from 'styled-components';
 import {toggleBottomPanelVisibility} from '../actions';
 import {getIsBottomPanelVisible} from '../reducers/dashboardReducer';
@@ -37,12 +38,12 @@ class _Toolbar_ extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-    isBottomPanelVisible: getIsBottomPanelVisible(state)
+    isBottomPanelVisible: getIsBottomPanelVisible(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
    onToolbarIconClick() {
-       dispatch(toggleBottomPanelVisibility())
+       dispatch(push('/add_link'))
    }
 });
 
