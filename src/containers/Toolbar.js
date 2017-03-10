@@ -25,12 +25,12 @@ class _Toolbar_ extends Component {
     }
 
     render() {
-        const {onToolbarIconClick, isBottomPanelVisible, path} = this.props;
+        const {onToolbarIconClick, isBottomPanelVisible} = this.props;
         return (
             <StyledToolbar>
                 <ToolbarIcon
                     onToolbarIconClick={onToolbarIconClick}
-                    action={path}
+                    path={'/add_link'}
                     isBottomPanelVisible={isBottomPanelVisible} />
             </StyledToolbar>
         )
@@ -42,8 +42,8 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-   onToolbarIconClick() {
-       dispatch(push('/add_link'))
+   onToolbarIconClick(path) {
+       dispatch(push(path))
    }
 });
 

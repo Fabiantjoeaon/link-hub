@@ -10,7 +10,7 @@ import {combineReducers} from 'redux';
 const backgroundColorReducer = (state = 'f2f2f2', action) => {
     switch (action.type) {
         case CHANGE_DASHBOARD_BACKGROUND_COLOR:
-            return action.backgroundColor
+            return action.backgroundColor;
         default:
             return state;
     }

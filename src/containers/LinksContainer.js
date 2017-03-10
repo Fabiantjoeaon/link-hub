@@ -24,9 +24,8 @@ const GroupListOverlay = styled.div`
     z-index: 1;
     visibility: ${props => props.visible ? 'visible' : 'hidden'};
     opacity: ${props => props.visible ? '1' : '0'};
-    transition: opacity 0.4s 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: all 0.4s ${props => props.visible ? '0.4s' : '0.2s'} cubic-bezier(0.165, 0.84, 0.44, 1);
     will-change: opacity;
-    
 `;
 
 class _LinksContainer_ extends Component {

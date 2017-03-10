@@ -20,8 +20,3 @@ export const changeBackgroundColor = (backgroundColor) => ({
     type: actionTypes.CHANGE_DASHBOARD_BACKGROUND_COLOR,
     backgroundColor
 });
-
-export const changeBottomPanelContent = (bottomPanelContent) => ({
-    type: actionTypes.CHANGE_BOTTOM_PANEL_CONTENT,
-    bottomPanelContent
-});
