@@ -2,6 +2,9 @@ import {
     CHANGE_DASHBOARD_BACKGROUND_COLOR,
     TOGGLE_DASHBOARD_BOTTOM_PANEL_VISIBILITY
 } from '../actions/constants';
+
+import { LOCATION_CHANGE } from 'react-router-redux';
+
 import {combineReducers} from 'redux';
 
 const backgroundColorReducer = (state = 'f2f2f2', action) => {
@@ -18,7 +21,12 @@ export const getBackgroundColor = (state) => state.dashboard.backgroundColor;
 const bottomPanelVisibilityReducer = (state = false, action) => {
     switch (action.type) {
         case TOGGLE_DASHBOARD_BOTTOM_PANEL_VISIBILITY:
-            return !state.isBottomPanelVisible;
+        case LOCATION_CHANGE:
+            if(action.payload.pathname == '/') {
+                return false;
+            } else {
+                return true;
+            }
         default:
             return state;
     }

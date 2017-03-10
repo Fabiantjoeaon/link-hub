@@ -21,10 +21,6 @@ export const changeBackgroundColor = (backgroundColor) => ({
     backgroundColor
 });
 
-export const toggleBottomPanelVisibility = () => ({
-    type: actionTypes.TOGGLE_DASHBOARD_BOTTOM_PANEL_VISIBILITY
-});
-
 export const changeBottomPanelContent = (bottomPanelContent) => ({
     type: actionTypes.CHANGE_BOTTOM_PANEL_CONTENT,
     bottomPanelContent
