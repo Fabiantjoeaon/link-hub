@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
-import {getBackgroundColor} from '../reducers/dashboardReducer';
+import {getBackgroundColor, getIsBottomPanelVisible} from '../reducers/dashboardReducer';
 import LinksContainer from './LinksContainer';
 import Toolbar from './Toolbar';
 import BottomPanel from './BottomPanel';
@@ -11,10 +11,10 @@ const StyledDashboard = styled.div`
     height: auto;
     max-height: 100vh;
     background-color: #${props => props.backgroundColor};
-    transition: all 0.3s ease-out;
+    transition: all 3s cubic-bezier(0.19, 1, 0.22, 1);
 `;
 
-const _Dashboard_ = ({backgroundColor}) => (
+const _Dashboard_ = ({backgroundColor, isBottomPanelVisible}) => (
     <StyledDashboard backgroundColor={backgroundColor}>
         <LinksContainer />
         <Toolbar />
@@ -23,7 +23,8 @@ const _Dashboard_ = ({backgroundColor}) => (
 );
 
 const mapStateToProps = (state) => ({
-    backgroundColor: getBackgroundColor(state)
+    backgroundColor: getBackgroundColor(state),
+    isBottomPanelVisible: getIsBottomPanelVisible(state)
 });
 
 const Dashboard = connect(

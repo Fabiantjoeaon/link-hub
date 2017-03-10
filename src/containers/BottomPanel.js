@@ -12,14 +12,13 @@ const easeOutQuint = 'cubic-bezier(0.23, 1, 0.32, 1)';
 
 const StyledBottomPanel = styled.section`
     width: 100%;
-    height: 500px;
     background-color: #f2f2f2;
-    position: absolute;
+    position: fixed;
     bottom:0;
     right:0;
     z-index: 2;
     transition: all ${props => props.visible ? `0.5s 0.4s ${easeOutQuint}` : `0.3s 0s ${easeInQuad}`} 
-    display: ${props => props.visible ? 'visible' : 'hidden'};
+    height: ${props => props.visible ? '500px' : '0px'};
     transform: ${props => props.visible ? 'translateY(0px)' : 'translateY(500px)'};
     will-change: transform;
 `;
