@@ -4,7 +4,6 @@ import {getIsBottomPanelVisible} from '../reducers/dashboardReducer';
 import styled from 'styled-components';
 import {Router, Route} from 'react-router';
 import {push} from 'react-router-redux';
-import {history} from '../index';
 import AddLinkPanel from './AddLinkPanel';
 
 const easeInQuad = 'cubic-bezier(0.55, 0.085, 0.68, 0.53)';
@@ -29,14 +28,12 @@ class _BottomPanel_ extends Component {
     }
 
     render() {
-        const {isBottomPanelVisible} = this.props;
+        const {isBottomPanelVisible, bottomPanelContent} = this.props;
         return (
             <StyledBottomPanel
                 visible={isBottomPanelVisible}>
-                <Router history={history}>
-                    <Route path='/add_link' component={AddLinkPanel}/>
-                </Router>
                 <p onClick={() => {this.props.onXClick('/')}}>X</p>
+                {bottomPanelContent}
             </StyledBottomPanel>
         )
     }

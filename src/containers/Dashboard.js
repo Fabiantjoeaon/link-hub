@@ -14,17 +14,20 @@ const StyledDashboard = styled.div`
     transition: all 3s cubic-bezier(0.19, 1, 0.22, 1);
 `;
 
-const _Dashboard_ = ({backgroundColor, isBottomPanelVisible}) => (
-    <StyledDashboard backgroundColor={backgroundColor}>
-        <LinksContainer />
-        <Toolbar />
-        <BottomPanel />
-    </StyledDashboard>
-);
+const _Dashboard_ = ({routing, backgroundColor, children}) => {
+    return (
+        <StyledDashboard backgroundColor={backgroundColor}>
+            <LinksContainer />
+            <Toolbar />
+            <BottomPanel bottomPanelContent={children} />
+        </StyledDashboard>
+    )
+};
 
 const mapStateToProps = (state) => ({
     backgroundColor: getBackgroundColor(state),
-    isBottomPanelVisible: getIsBottomPanelVisible(state)
+    isBottomPanelVisible: getIsBottomPanelVisible(state),
+    routing: state.routing
 });
 
 const Dashboard = connect(
