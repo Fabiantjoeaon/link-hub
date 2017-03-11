@@ -14,7 +14,7 @@ const StyledDashboard = styled.div`
     transition: all 3s cubic-bezier(0.19, 1, 0.22, 1);
 `;
 
-const _Dashboard_ = ({routing, backgroundColor, children}) => {
+const _Dashboard_ = ({backgroundColor, children}) => {
     return (
         <StyledDashboard backgroundColor={backgroundColor}>
             <LinksContainer />
@@ -26,8 +26,7 @@ const _Dashboard_ = ({routing, backgroundColor, children}) => {
 
 const mapStateToProps = (state) => ({
     backgroundColor: getBackgroundColor(state),
-    isBottomPanelVisible: getIsBottomPanelVisible(state),
-    routing: state.routing
+    isBottomPanelVisible: getIsBottomPanelVisible(state)
 });
 
 const Dashboard = connect(

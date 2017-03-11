@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {getIsBottomPanelVisible} from '../reducers/dashboardReducer';
 import styled from 'styled-components';
-import {Router, Route} from 'react-router';
 import {push} from 'react-router-redux';
-import AddLinkPanel from './AddLinkPanel';
+
+import BottomPanelIcon from '../components/BottomPanelIcon';
 
 const easeInQuad = 'cubic-bezier(0.55, 0.085, 0.68, 0.53)';
 const easeOutQuint = 'cubic-bezier(0.23, 1, 0.32, 1)';
@@ -22,18 +22,37 @@ const StyledBottomPanel = styled.section`
     will-change: transform;
 `;
 
+const BottomPanelContent = styled.div`
+    width: 70%;
+    height: 100%;
+    margin: 0 auto;
+    background-color: #e9e9e9;
+    
+`;
+
+const BottomPanelNav = styled.div`
+    width: 20%;
+    height: 100%;
+    position:absolute;
+    right: 0;
+`;
+
 class _BottomPanel_ extends Component {
     constructor(props) {
         super(props);
     }
 
     render() {
-        const {isBottomPanelVisible, bottomPanelContent} = this.props;
+        const {isBottomPanelVisible, bottomPanelContent, onNavIconClick} = this.props;
         return (
             <StyledBottomPanel
                 visible={isBottomPanelVisible}>
-                <p onClick={() => {this.props.onXClick('/')}}>X</p>
-                {bottomPanelContent}
+                <BottomPanelContent>
+                    {bottomPanelContent}
+                </BottomPanelContent>
+                <BottomPanelNav>
+                    <BottomPanelIcon onNavIconClick={onNavIconClick} />
+                </BottomPanelNav>
             </StyledBottomPanel>
         )
     }
@@ -44,7 +63,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    onXClick(path) {
+    onNavIconClick(path) {
         dispatch(push(path))
     }
 });
