@@ -1,18 +1,14 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
-import bindAll from 'lodash/bindAll';
-
-import {TweenLite} from 'gsap';
+import SvgIcon from './SvgIcon';
 
 const StyledToolbarIcon = styled.div`
-    border-radius: 50%;
-    cursor: pointer;
     transition: transform 0.5s ${props => props.visible ? '0s' : '0.3s'} cubic-bezier(0.68, -1.3, 0.265, 1.85);
     transform: ${props => props.visible ? 'translateY(200px)' : 'translateY(0px)'};
     will-change: transform;
 `;
 
-const PlusIcon = () => (
+const AddLinkIcon = () => (
     <svg width="75" height="75" viewBox="0 0 75 75" xmlns="http://www.w3.org/2000/svg">
         <path
             id="Plusicon"
@@ -28,11 +24,10 @@ const ToolbarIcon = ({
 }) => (
     <StyledToolbarIcon
         visible={isBottomPanelVisible}
-        onClick={() => {
-            onToolbarIconClick(path)
-        }}
     >
-        <PlusIcon/>
+        <SvgIcon path='add_link' onClickHandler={onToolbarIconClick}>
+            <AddLinkIcon/>
+        </SvgIcon>
     </StyledToolbarIcon>
 )
 
