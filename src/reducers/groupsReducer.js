@@ -1,6 +1,15 @@
 import {ADD_GROUP} from '../actions/constants';
 
-const groupsReducer = (state = [], action) => {
+const initialState = [
+    {
+        id: 0,
+        name: 'Uncategorized',
+        color: '999999',
+        dateAdded: new Date(2014).toString()
+    }
+];
+
+const groupsReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_GROUP:
             return [
@@ -8,7 +17,8 @@ const groupsReducer = (state = [], action) => {
                 {
                     id: action.id,
                     name: action.name,
-                    color: action.color
+                    color: action.color,
+                    dateAdded: action.dateAdded
                 }
             ]
         default:
@@ -16,6 +26,7 @@ const groupsReducer = (state = [], action) => {
     }
 }
 
-export const getGroups = (state) => state.groups;
+export const getGroupsSortedByDate = (state) =>
+    state.groups.sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded));
 
 export default groupsReducer;

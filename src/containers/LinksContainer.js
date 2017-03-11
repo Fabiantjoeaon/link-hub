@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import bindAll from 'lodash/bindAll';
 
 import * as actions from '../actions';
-import {getGroups} from '../reducers/groupsReducer';
+import {getGroupsSortedByDate} from '../reducers/groupsReducer';
 import {getIsBottomPanelVisible} from '../reducers/dashboardReducer';
 import GroupList from '../components/GroupList';
 
@@ -36,11 +36,11 @@ class _LinksContainer_ extends Component {
     }
 
     componentDidMount() {
-        this.props.addGroup('group1', 'B1B7D1');
-        this.props.addGroup('group2', 'FFC15E');
-        this.props.addGroup('group3', '187795');
-        this.props.addGroup('group4', 'F4ACB7');
-        this.props.addGroup('group5', 'EC4E20');
+        this.props.addGroup('group1', 'B1B7D1', new Date().toString());
+        this.props.addGroup('group2', 'FFC15E', new Date().toString());
+        this.props.addGroup('group3', '187795', new Date().toString());
+        this.props.addGroup('group4', 'F4ACB7', new Date().toString());
+        this.props.addGroup('group5', 'EC4E20', new Date().toString());
 
         this.props.addLink('link11', 'desc');
         this.props.addLink('link2', 'desc');
@@ -58,6 +58,7 @@ class _LinksContainer_ extends Component {
     }
 
     render() {
+        console.log(this.props.groups)
         const {isBottomPanelVisible} = this.props;
         return (
             <StyledLinksComponent>
@@ -72,7 +73,7 @@ class _LinksContainer_ extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    groups: getGroups(state),
+    groups: getGroupsSortedByDate(state),
     isBottomPanelVisible: getIsBottomPanelVisible(state)
 });
 

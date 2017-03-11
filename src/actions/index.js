@@ -9,11 +9,12 @@ export const addLink = (url, description, group = 'Uncategorized') => ({
     group
 });
 
-export const addGroup = (name, color) => ({
+export const addGroup = (name, color, dateAdded) => ({
     type: actionTypes.ADD_GROUP,
     id: v4(),
     name,
-    color
+    color,
+    dateAdded
 });
 
 export const changeBackgroundColor = (backgroundColor) => ({

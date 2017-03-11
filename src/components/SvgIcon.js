@@ -15,7 +15,7 @@ const StyledToolbarIcon = styled(StyledSVGIcon)`
 `;
 
 const StyledBottomPanelIcon = styled(StyledSVGIcon)`
-    transition: transform 0.4s ${props => !props.visible ? '0s' : '0.65s'} ${easeOutQuart};
+    transition: transform 0.4s ${props => !props.visible ? '0s' : '0.75s'} ${easeOutQuart};
     transform: ${props => !props.visible ? 'translateX(300px)' : 'translateX(0px)'};
 `;
 
