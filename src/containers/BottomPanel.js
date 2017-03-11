@@ -3,11 +3,9 @@ import {connect} from 'react-redux';
 import {getIsBottomPanelVisible} from '../reducers/dashboardReducer';
 import styled from 'styled-components';
 import {push} from 'react-router-redux';
+import SvgIcon from '../components/SvgIcon';
 
-import BottomPanelIcon from '../components/BottomPanelIcon';
-
-const easeInQuad = 'cubic-bezier(0.55, 0.085, 0.68, 0.53)';
-const easeOutQuint = 'cubic-bezier(0.23, 1, 0.32, 1)';
+import {easeInQuad, easeOutQuint} from '../lib/cssEasings.js';
 
 const StyledBottomPanel = styled.section`
     width: 100%;
@@ -27,15 +25,24 @@ const BottomPanelContent = styled.div`
     height: 100%;
     margin: 0 auto;
     background-color: #e9e9e9;
-    
 `;
 
 const BottomPanelNav = styled.div`
     width: 20%;
-    height: 100%;
+    height: 80%;
     position:absolute;
-    right: 0;
+    right: -10%;
+    top: 10%; 
 `;
+
+const AddLinkIcon = () => (
+    <svg width="75" height="75" viewBox="0 0 75 75" xmlns="http://www.w3.org/2000/svg">
+        <path
+            id="Plusicon"
+            d="M40.664 36.06V18h-4.956v18.06H17.372v4.88h18.336V59h4.956V40.94H59v-4.88H40.664zM38 73C18.67 73 3 57.33 3 38S18.67 3 38 3s35 15.67 35 35-15.67 35-35 35z"
+            fill="#525252" fillRule="evenodd"/>
+    </svg>
+)
 
 class _BottomPanel_ extends Component {
     constructor(props) {
@@ -45,13 +52,17 @@ class _BottomPanel_ extends Component {
     render() {
         const {isBottomPanelVisible, bottomPanelContent, onNavIconClick} = this.props;
         return (
-            <StyledBottomPanel
-                visible={isBottomPanelVisible}>
+            <StyledBottomPanel visible={isBottomPanelVisible}>
                 <BottomPanelContent>
                     {bottomPanelContent}
                 </BottomPanelContent>
                 <BottomPanelNav>
-                    <BottomPanelIcon onNavIconClick={onNavIconClick} />
+                    <SvgIcon
+                        layout='BottomPanel'
+                        path={'/'}
+                        {...this.props}>
+                        <AddLinkIcon/>
+                    </SvgIcon>
                 </BottomPanelNav>
             </StyledBottomPanel>
         )
@@ -63,7 +74,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    onNavIconClick(path) {
+    onSvgIconClick(path) {
         dispatch(push(path))
     }
 });

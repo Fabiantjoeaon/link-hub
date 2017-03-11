@@ -4,7 +4,7 @@ import {push} from 'react-router-redux';
 import styled from 'styled-components';
 import {toggleBottomPanelVisibility} from '../actions';
 import {getIsBottomPanelVisible} from '../reducers/dashboardReducer';
-import ToolbarIcon from '../components/ToolbarIcon';
+import ToolbarIcon from '../components/SvgIcon';
 
 const StyledToolbar = styled.section`
     position: fixed;
@@ -19,19 +19,29 @@ const StyledToolbar = styled.section`
     justify-content: space-around;
 `;
 
+const AddLinkIcon = () => (
+    <svg width="75" height="75" viewBox="0 0 75 75" xmlns="http://www.w3.org/2000/svg">
+        <path
+            id="Plusicon"
+            d="M40.664 36.06V18h-4.956v18.06H17.372v4.88h18.336V59h4.956V40.94H59v-4.88H40.664zM38 73C18.67 73 3 57.33 3 38S18.67 3 38 3s35 15.67 35 35-15.67 35-35 35z"
+            fill="#525252" fillRule="evenodd"/>
+    </svg>
+)
+
 class _Toolbar_ extends Component {
     constructor(props) {
         super(props);
     }
 
     render() {
-        const {onToolbarIconClick, isBottomPanelVisible} = this.props;
         return (
             <StyledToolbar>
                 <ToolbarIcon
-                    onToolbarIconClick={onToolbarIconClick}
+                    layout='Toolbar'
                     path={'/add_link'}
-                    isBottomPanelVisible={isBottomPanelVisible} />
+                    {...this.props}>
+                    <AddLinkIcon/>
+                </ToolbarIcon>
             </StyledToolbar>
         )
     }
@@ -42,7 +52,7 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-   onToolbarIconClick(path) {
+   onSvgIconClick(path) {
        dispatch(push(path))
    }
 });
