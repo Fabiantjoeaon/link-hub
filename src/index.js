@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import Root from './containers/Root';
 import {createStore, applyMiddleware, compose} from 'redux';
-import rootReducer from './reducers';
 import {syncHistoryWithStore, routerMiddleware} from 'react-router-redux';
 import createBrowserHistory from 'react-router/node_modules/history/lib/createBrowserHistory';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import {useRouterHistory} from 'react-router';
+
+import Root from './containers/Root';
+import rootReducer from './reducers';
 
 if(module.hot) {
     module.hot.accept();

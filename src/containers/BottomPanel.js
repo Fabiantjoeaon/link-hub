@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import {push} from 'react-router-redux';
 import SvgIcon from '../components/SvgIcon';
 
+import {RouteTransition} from 'react-router-transition';
+
 import {easeInQuad, easeOutQuint} from '../lib/cssEasings.js';
 
 const StyledBottomPanel = styled.section`
@@ -14,9 +16,9 @@ const StyledBottomPanel = styled.section`
     bottom:0;
     right:0;
     z-index: 2;
-    transition: all ${props => props.visible ? `0.5s 0.4s ${easeOutQuint}` : `0.3s 0s ${easeInQuad}`} 
+    transition: all ${props => props.visible ? `0.5s 0.5s ${easeOutQuint}` : `0.3s 0.1s ${easeInQuad}`} 
     height: ${props => props.visible ? '500px' : '0px'};
-    transform: ${props => props.visible ? 'translateY(0px)' : 'translateY(500px)'};
+    transform: ${props => props.visible ? 'translate3d(0px, 0px, 0px)' : 'translate3d(0px, 500px, 0px)'};
     will-change: transform;
 `;
 
@@ -24,6 +26,8 @@ const BottomPanelContent = styled.div`
     width: 70%;
     height: 100%;
     margin: 0 auto;
+    padding: 40px 40px;
+    box-sizing: border-box;
     background-color: #e9e9e9;
 `;
 
@@ -50,11 +54,25 @@ class _BottomPanel_ extends Component {
     }
 
     render() {
-        const {isBottomPanelVisible, bottomPanelContent, onNavIconClick} = this.props;
+        const {isBottomPanelVisible, bottomPanelContent, onNavIconClick, routing} = this.props;
+        const {pathname} = routing.locationBeforeTransitions;
         return (
             <StyledBottomPanel visible={isBottomPanelVisible}>
                 <BottomPanelContent>
-                    {bottomPanelContent}
+                    <RouteTransition
+                        pathname={pathname}
+                        atEnter={{translateY: 700, opacity: 0}}
+                        atLeave={{translateY: 700, opacity: 0}}
+                        atActive={{translateY: 0, opacity: 1}}
+                        mapStyles={
+                            styles => ({
+                                transform: `translateY(${styles.translateY}%)`,
+                                opacity: `${styles.opacity}`,
+                                position: 'absolute'
+                            })}
+                    >
+                        {bottomPanelContent}
+                    </RouteTransition>
                 </BottomPanelContent>
                 <BottomPanelNav>
                     <SvgIcon
@@ -67,10 +85,12 @@ class _BottomPanel_ extends Component {
             </StyledBottomPanel>
         )
     }
-};
+}
+;
 
 const mapStateToProps = (state) => ({
-    isBottomPanelVisible: getIsBottomPanelVisible(state)
+    isBottomPanelVisible: getIsBottomPanelVisible(state),
+    routing: state.routing
 });
 
 const mapDispatchToProps = (dispatch) => ({
