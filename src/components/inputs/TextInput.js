@@ -10,15 +10,15 @@ const StyledTextInputContainer = styled.div`
     max-width: 500px;
     width: 500px;
     position: relative;
-    height: 80px;
-    line-height: 80px;
+    height: 60px;
+    line-height: 60px;
     background-color: #f1f1f1;
     margin-bottom: 15px;
 `;
 
 const StyledField = styled(Field)`
     position: absolute;
-    font-size: 1em;
+    font-size: 0.9em;
     top: 0;
     right: 100%;
     padding: 0px 20px;
@@ -51,7 +51,7 @@ const StyledField = styled(Field)`
 const StyledLabel = styled.label`
     cursor: text;
     padding: 0px 20px;
-    font-size: 1.2em;
+    font-size: 1.1em;
     background-color: #f1f1f1;
     z-index: 10;
     display: block;
@@ -77,10 +77,7 @@ export default class TextInput extends Component {
     constructor(props) {
         super(props)
 
-        this.state = {
-            val: ''
-        }
-
+        this.state = {val: ''}
         bindAll(this, '_onClickHandler', '_onChangeHandler');
     }
 

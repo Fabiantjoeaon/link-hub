@@ -1,6 +1,17 @@
 import React from 'react';
 import TextInput from './inputs/TextInput';
+import GroupRadioButton from './inputs/GroupRadioButton';
 import {Field, reduxForm} from 'redux-form';
+import styled from 'styled-components';
+
+const StyledAddLinkForm = styled.form`
+    width: 500px;
+`;
+
+const GroupSelector = styled.div`
+    width: 100%;
+    height: 170px;
+`;
 
 const _AddLinkForm_ = ({
     handleSubmit,
@@ -9,25 +20,22 @@ const _AddLinkForm_ = ({
     submitting,
     groups
 }) => (
-    <form onSubmit={handleSubmit(handleAddLinkSubmit)}>
-        <TextInput label='URL' name='url' />
-        <TextInput label='Description' name='description' />
-        <div>
-            <label htmlFor='group'>Group: </label>
-            <Field name='group' component='select'>
-                {groups.map(group =>
-                    <option key={group.id} value={group.name}>{group.name}</option>
-                )}
-            </Field>
-        </div>
+    <StyledAddLinkForm onSubmit={handleSubmit(handleAddLinkSubmit)}>
+        <TextInput label='URL' name='url'/>
+        <TextInput label='Description' name='description'/>
+        <GroupSelector>
+            {groups.map(group =>
+                <GroupRadioButton value={group.name} key={group.id} {...group} />
+            )}
+        </GroupSelector>
         <div>
             <button type="submit" disabled={pristine || submitting}>Submit</button>
         </div>
-    </form>
+    </StyledAddLinkForm>
 );
 
 const AddLinkForm = reduxForm(
-    { form: 'addLinkForm' }
+    {form: 'addLinkForm'}
 )(_AddLinkForm_);
 
 export default AddLinkForm;

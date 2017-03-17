@@ -42,11 +42,11 @@ class _LinksContainer_ extends Component {
         this.props.addGroup('group4', 'F4ACB7', new Date().toString());
         this.props.addGroup('group5', 'EC4E20', new Date().toString());
 
-        this.props.addLink('link11', 'desc');
-        this.props.addLink('link2', 'desc');
+        this.props.addLink('link11', 'desc', 'Uncategorized');
+        this.props.addLink('link2', 'desc', 'Uncategorized');
         this.props.addLink('link3', 'desc', 'group2');
         this.props.addLink('link4', 'desc', 'group3');
-        this.props.addLink('link55', 'desc');
+        this.props.addLink('link55', 'desc', 'Uncategorized');
     }
 
     _onGroupMouseEnterHandler(color) {
@@ -58,7 +58,6 @@ class _LinksContainer_ extends Component {
     }
 
     render() {
-        console.log(this.props.groups)
         const {isBottomPanelVisible} = this.props;
         return (
             <StyledLinksComponent>

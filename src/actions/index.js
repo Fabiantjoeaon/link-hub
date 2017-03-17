@@ -1,7 +1,7 @@
 import * as actionTypes from './constants';
 import v4 from 'node-uuid';
 
-export const addLink = (url, description, group = 'Uncategorized') => ({
+export const addLink = (url, description, group) => ({
     type: actionTypes.ADD_LINK,
     id: v4(),
     url,

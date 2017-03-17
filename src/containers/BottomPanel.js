@@ -17,8 +17,8 @@ const StyledBottomPanel = styled.section`
     right:0;
     z-index: 2;
     transition: all ${props => props.visible ? `0.5s 0.5s ${easeOutQuint}` : `0.3s 0.1s ${easeInQuad}`} 
-    height: ${props => props.visible ? '500px' : '0px'};
-    transform: ${props => props.visible ? 'translate3d(0px, 0px, 0px)' : 'translate3d(0px, 500px, 0px)'};
+    height: ${props => props.visible ? '570px' : '0px'};
+    transform: ${props => props.visible ? 'translate3d(0px, 0px, 0px)' : 'translate3d(0px, 570px, 0px)'};
     will-change: transform;
 `;
 

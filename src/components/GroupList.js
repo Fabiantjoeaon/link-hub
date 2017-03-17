@@ -7,6 +7,11 @@ const StyledGroupList = styled.div`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    
+    &:before, &:after {
+        content: none;
+        width: 0;
+    }
 `;
 
 const GroupList = ({ groups, links, ...props}) => (
