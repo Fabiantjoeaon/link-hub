@@ -7,7 +7,7 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 
 import {combineReducers} from 'redux';
 
-const backgroundColorReducer = (state = 'f2f2f2', action) => {
+const backgroundColorReducer = (state = 'ffffff', action) => {
     switch (action.type) {
         case CHANGE_DASHBOARD_BACKGROUND_COLOR:
             return action.backgroundColor;

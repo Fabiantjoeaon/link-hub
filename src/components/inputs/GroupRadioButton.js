@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
-import {Field} from 'redux-form';
+import {change} from 'redux-form';
+
 
 const StyledGroupRadioContainer = styled.div`
    display: inline-block;
    padding: 2.5px;
-   width: calc(50% - 5px);
+   width: calc(30% - 5px);
 `;
 
 const StyledGroupRadioLabel = styled.label`
@@ -49,7 +50,7 @@ const StyledGroupRadioLabel = styled.label`
    }
 `;
 
-const StyledGroupRadioButton = styled(Field)` 
+const StyledGroupRadioButton = styled.input` 
     display: none;
     
    &:checked {
@@ -64,8 +65,6 @@ const StyledGroupRadioButton = styled(Field)`
    }
 `;
 
-
-
 export default class GroupRadioButton extends Component {
     constructor(props) {
         super(props);
@@ -74,6 +73,7 @@ export default class GroupRadioButton extends Component {
     _onLabelClick() {
         const input = ReactDOM.findDOMNode(this.input);
         input.checked = !input.checked;
+        this.props.meta.dispatch(change('addLinkForm', 'group', this.props.name))
     }
 
     render() {
@@ -81,9 +81,9 @@ export default class GroupRadioButton extends Component {
         return (
             <StyledGroupRadioContainer>
                 <StyledGroupRadioButton
-                    selected={name == 'Uncategorized'}
+                    defaultChecked={name == 'Uncategorized'}
                     ref={input => this.input = input}
-                    component='input' name='group' type='radio' value={name}/>
+                    name='group' type='radio' value={name}/>
                 <StyledGroupRadioLabel
                     onClick={() => {this._onLabelClick()}}
                     color={color}>{name}</StyledGroupRadioLabel>

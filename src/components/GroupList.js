@@ -7,6 +7,8 @@ const StyledGroupList = styled.div`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    transform: ${props => props.visible ? 'translate3d(0px,0px,-89px)' : 'translate3d(0px,0px,0px)'};
+    transition: all ${props => props.visible ? '0.7s 0.5s' : '0.8s 0.4s'} cubic-bezier(0.19, 1, 0.22, 1);
     
     &:before, &:after {
         content: none;
@@ -14,8 +16,8 @@ const StyledGroupList = styled.div`
     }
 `;
 
-const GroupList = ({ groups, links, ...props}) => (
-    <StyledGroupList>
+const GroupList = ({ groups, links, visible, ...props}) => (
+    <StyledGroupList visible={visible}>
         {groups.map(group =>
             <Group
                 key={group.id}

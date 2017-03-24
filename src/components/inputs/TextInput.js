@@ -7,8 +7,8 @@ import bindAll from 'lodash/bindAll';
 const StyledTextInputContainer = styled.div`
     display: block;
     overflow: hidden;
-    max-width: 500px;
-    width: 500px;
+    max-width: 757px;
+    width: 757px;
     position: relative;
     height: 60px;
     line-height: 60px;
@@ -35,9 +35,9 @@ const StyledField = styled(Field)`
     
     &:focus, &.active {
         outline: 0;
-        transform: translate3d(350px, 0px, 0px);
+        transform: translate3d(529px, 0px, 0px);
         + label {
-           transform: translate3d(350px, 0px, 0px);
+           transform: translate3d(60%, 0%, 0%);
            
            span {
                 opacity: 0;
@@ -96,7 +96,7 @@ export default class TextInput extends Component {
     render() {
         const {name, label, ...props} = this.props;
         return (
-            <StyledTextInputContainer >
+            <StyledTextInputContainer>
                 <StyledField
                     ref={input => this.inputRef = input}
                     name={name}

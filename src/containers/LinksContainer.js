@@ -9,14 +9,15 @@ import {getIsBottomPanelVisible} from '../reducers/dashboardReducer';
 import GroupList from '../components/GroupList';
 
 const StyledLinksComponent = styled.section`
-    height: 100%;
-    width: 100%;
+    height: calc(90% - 80px);
+    width: calc(100% - 80px);
+    padding: 40px 40px;
     margin: 0 auto;
 `;
 
 const GroupListOverlay = styled.div`
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     background-color: rgba(0,0,0,0.6);
     position:absolute;
     top:0;
@@ -41,6 +42,7 @@ class _LinksContainer_ extends Component {
         this.props.addGroup('group3', '187795', new Date().toString());
         this.props.addGroup('group4', 'F4ACB7', new Date().toString());
         this.props.addGroup('group5', 'EC4E20', new Date().toString());
+        this.props.addGroup('group6', 'B1B7D1', new Date().toString());
 
         this.props.addLink('link11', 'desc', 'Uncategorized');
         this.props.addLink('link2', 'desc', 'Uncategorized');
@@ -54,7 +56,7 @@ class _LinksContainer_ extends Component {
     }
 
     _onGroupMouseLeaveHandler() {
-        this.props.changeBackgroundColor('f2f2f2');
+        this.props.changeBackgroundColor('ffffff');
     }
 
     render() {
@@ -63,6 +65,7 @@ class _LinksContainer_ extends Component {
             <StyledLinksComponent>
                 <GroupListOverlay visible={isBottomPanelVisible} />
                 <GroupList
+                    visible={isBottomPanelVisible}
                     onGroupMouseEnterHandler={this._onGroupMouseEnterHandler}
                     onGroupMouseLeaveHandler={this._onGroupMouseLeaveHandler}
                     {...this.props} />

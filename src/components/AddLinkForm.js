@@ -5,13 +5,22 @@ import {Field, reduxForm} from 'redux-form';
 import styled from 'styled-components';
 
 const StyledAddLinkForm = styled.form`
-    width: 500px;
+    width: 100%;
 `;
 
-const GroupSelector = styled.div`
+const GroupSelector = styled(Field)`
+    display: inline-block;
     width: 100%;
-    height: 170px;
+    height: 150px;
 `;
+
+const renderGroups = ({groups, ...props}) => (
+    <div>
+        {groups.map(group =>
+            <GroupRadioButton {...props} key={group.id} {...group} />
+        )}
+    </div>
+)
 
 const _AddLinkForm_ = ({
     handleSubmit,
@@ -23,11 +32,7 @@ const _AddLinkForm_ = ({
     <StyledAddLinkForm onSubmit={handleSubmit(handleAddLinkSubmit)}>
         <TextInput label='URL' name='url'/>
         <TextInput label='Description' name='description'/>
-        <GroupSelector>
-            {groups.map(group =>
-                <GroupRadioButton value={group.name} key={group.id} {...group} />
-            )}
-        </GroupSelector>
+        <GroupSelector name='group' groups={groups} component={renderGroups}/>
         <div>
             <button type="submit" disabled={pristine || submitting}>Submit</button>
         </div>

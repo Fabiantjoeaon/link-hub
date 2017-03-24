@@ -11,7 +11,7 @@ import {easeInQuad, easeOutQuint} from '../lib/cssEasings.js';
 
 const StyledBottomPanel = styled.section`
     width: 100%;
-    background-color: #f2f2f2;
+    background-color: #fff;
     position: fixed;
     bottom:0;
     right:0;
@@ -28,7 +28,7 @@ const BottomPanelContent = styled.div`
     margin: 0 auto;
     padding: 40px 40px;
     box-sizing: border-box;
-    background-color: #e9e9e9;
+    background-color: #fff;
 `;
 
 const BottomPanelNav = styled.div`
@@ -66,9 +66,9 @@ class _BottomPanel_ extends Component {
                         atActive={{translateY: 0, opacity: 1}}
                         mapStyles={
                             styles => ({
+                                width: '100%',
                                 transform: `translateY(${styles.translateY}%)`,
-                                opacity: `${styles.opacity}`,
-                                position: 'absolute'
+                                opacity: `${styles.opacity}`
                             })}
                     >
                         {bottomPanelContent}

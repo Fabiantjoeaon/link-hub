@@ -5,10 +5,10 @@ const StyledLink = styled.li`
     list-style-type: none;
     margin:0;
     padding: 0;
-    color: #525252;
+    color: #fff;
     font-family: 'Work Sans', sans-serif;
     font-weight: 100;
-    font-size: 1.2em;
+    font-size: 0.9em;
 `;
 
 const Link = ({ url, description }) => (

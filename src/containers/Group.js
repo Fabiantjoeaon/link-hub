@@ -7,19 +7,22 @@ import GroupLinksList from '../components/GroupLinksList';
 import {getLinksByGroup} from '../reducers/linksReducer';
 
 const StyledGroup = styled.div`
-    width: calc(100% / 4);
-    height: 25em;
-    transition: all 1s cubic-bezier(0.19, 1, 0.22, 1);
+    width: calc((100% / 4) - 10px * 2);
+    border-radius: 5px;
+    background-color: ${props => props.color};
+    height: calc(20em - 10px * 2);
+    margin: 10px;
+    transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     position: relative;
     font-family: 'Work Sans', sans-serif;
     
     &:hover {
         cursor: pointer;
         max-width: 60% !important;
-        background-color: #f2f2f2;
+        background-color: #ffffff;
         
-        h1 {
-            color: #525252;
+        h1, span, li {
+            color: #646464 !important;
         }
     }
     
@@ -30,7 +33,6 @@ const StyledGroup = styled.div`
     span {
         margin: 15px 20px 0px 0px;
         padding: 10px 25px;
-        background-color: ${props => props.color};
         color: #f2f2f2;
         font-weight:400;
         float: right;
@@ -38,12 +40,12 @@ const StyledGroup = styled.div`
     }
         
     h1 {
-        color: #525252;
+        color: #fff;
         text-align: right;
         margin: 0;
         padding: 20px 25px;
-        font-size: 1.3em;
-        font-weight: 400;
+        font-size: 1.1em;
+        font-weight: 100;
         text-transform: uppercase;
     }
 `;

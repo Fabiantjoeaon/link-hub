@@ -17,9 +17,9 @@ class _AddLinkPanel_ extends Component {
     }
 
     _handleAddLinkSubmit(values) {
-        console.log(values);
         const {url, description, group} = values;
         this.props.addLink(url, description, group);
+        console.log(values)
     }
 
     render() {
