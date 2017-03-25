@@ -1,10 +1,13 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import styled, {keyframes} from 'styled-components';
+import styled from 'styled-components';
 import {getBackgroundColor, getIsBottomPanelVisible} from '../reducers/dashboardReducer';
 import LinksContainer from './LinksContainer';
 import Toolbar from './Toolbar';
 import BottomPanel from './BottomPanel';
+import {graphql} from 'react-apollo';
+
+import {getAllGroups} from '../graphql/queries';
 
 const StyledDashboard = styled.div`
     width: 100vw;
@@ -15,12 +18,12 @@ const StyledDashboard = styled.div`
     transition: all 2s cubic-bezier(0.19, 1, 0.22, 1);
 `;
 
-const _Dashboard_ = ({backgroundColor, children}) => {
+const _Dashboard_ = ({backgroundColor, children, ...props}) => {
     return (
         <StyledDashboard backgroundColor={backgroundColor}>
-            <LinksContainer />
+            <LinksContainer {...props} />
             <Toolbar />
-            <BottomPanel bottomPanelContent={children} />
+            <BottomPanel {...props} bottomPanelContent={children} />
         </StyledDashboard>
     )
 };
@@ -30,9 +33,14 @@ const mapStateToProps = (state) => ({
     isBottomPanelVisible: getIsBottomPanelVisible(state)
 });
 
-const Dashboard = connect(
+const Dashboard = graphql(getAllGroups, {
+    props: ({ ownProps, data: { loading, allGroups} }) => ({
+        loading,
+        groups: allGroups
+    }),
+})(connect(
     mapStateToProps
-)(_Dashboard_);
+)(_Dashboard_));
 export default Dashboard;
 
 

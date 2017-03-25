@@ -1,9 +1,8 @@
 import React from 'react';
-// import {Provider} from 'react-redux';
 import Dashboard from './Dashboard';
 import {Router, Route} from 'react-router';
 import {ApolloProvider} from 'react-apollo';
-import client from '../apollo';
+import client from '../graphql/apolloClient';
 import {history} from '../index';
 import AddLinkPanel from './AddLinkPanel';
 

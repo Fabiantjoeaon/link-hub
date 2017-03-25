@@ -54,10 +54,19 @@ class _BottomPanel_ extends Component {
     }
 
     render() {
-        const {isBottomPanelVisible, bottomPanelContent, onNavIconClick, routing} = this.props;
+        const {
+            isBottomPanelVisible,
+            bottomPanelContent,
+            onNavIconClick,
+            loading,
+            routing
+        } = this.props;
+
         const {pathname} = routing.locationBeforeTransitions;
+
         return (
             <StyledBottomPanel visible={isBottomPanelVisible}>
+                {!loading ?
                 <BottomPanelContent>
                     <RouteTransition
                         pathname={pathname}
@@ -73,7 +82,7 @@ class _BottomPanel_ extends Component {
                     >
                         {bottomPanelContent}
                     </RouteTransition>
-                </BottomPanelContent>
+                </BottomPanelContent> : <h1>Loading</h1>}
                 <BottomPanelNav>
                     <SvgIcon
                         layout='BottomPanel'
@@ -86,7 +95,6 @@ class _BottomPanel_ extends Component {
         )
     }
 }
-;
 
 const mapStateToProps = (state) => ({
     isBottomPanelVisible: getIsBottomPanelVisible(state),

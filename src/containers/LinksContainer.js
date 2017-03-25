@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import bindAll from 'lodash/bindAll';
 
 import * as actions from '../actions';
-import {getGroupsSortedByDate} from '../reducers/groupsReducer';
 import {getIsBottomPanelVisible} from '../reducers/dashboardReducer';
 import GroupList from '../components/GroupList';
 
@@ -36,21 +35,6 @@ class _LinksContainer_ extends Component {
         bindAll(this, '_onGroupMouseEnterHandler', '_onGroupMouseLeaveHandler');
     }
 
-    componentDidMount() {
-        this.props.addGroup('group1', 'B1B7D1', new Date().toString());
-        this.props.addGroup('group2', 'FFC15E', new Date().toString());
-        this.props.addGroup('group3', '187795', new Date().toString());
-        this.props.addGroup('group4', 'F4ACB7', new Date().toString());
-        this.props.addGroup('group5', 'EC4E20', new Date().toString());
-        this.props.addGroup('group6', 'B1B7D1', new Date().toString());
-
-        this.props.addLink('link11', 'desc', 'Uncategorized');
-        this.props.addLink('link2', 'desc', 'Uncategorized');
-        this.props.addLink('link3', 'desc', 'group2');
-        this.props.addLink('link4', 'desc', 'group3');
-        this.props.addLink('link55', 'desc', 'Uncategorized');
-    }
-
     _onGroupMouseEnterHandler(color) {
         this.props.changeBackgroundColor(color);
     }
@@ -60,22 +44,24 @@ class _LinksContainer_ extends Component {
     }
 
     render() {
-        const {isBottomPanelVisible} = this.props;
+        const {isBottomPanelVisible, loading} = this.props;
         return (
             <StyledLinksComponent>
                 <GroupListOverlay visible={isBottomPanelVisible} />
-                <GroupList
-                    visible={isBottomPanelVisible}
-                    onGroupMouseEnterHandler={this._onGroupMouseEnterHandler}
-                    onGroupMouseLeaveHandler={this._onGroupMouseLeaveHandler}
-                    {...this.props} />
+                {!loading ?
+                    <GroupList
+                        visible={isBottomPanelVisible}
+                        onGroupMouseEnterHandler={this._onGroupMouseEnterHandler}
+                        onGroupMouseLeaveHandler={this._onGroupMouseLeaveHandler}
+                        {...this.props} /> :
+                    <h1>Loading</h1>
+                }
             </StyledLinksComponent>
         );
     }
 }
 
 const mapStateToProps = (state) => ({
-    groups: getGroupsSortedByDate(state),
     isBottomPanelVisible: getIsBottomPanelVisible(state)
 });
 

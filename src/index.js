@@ -5,7 +5,7 @@ import {syncHistoryWithStore, routerMiddleware} from 'react-router-redux';
 import createBrowserHistory from 'react-router/node_modules/history/lib/createBrowserHistory';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import {useRouterHistory} from 'react-router';
-import client from './apollo';
+import client from './graphql/apolloClient';
 
 import Root from './containers/Root';
 import rootReducer from './reducers';

@@ -50,7 +50,7 @@ const StyledGroup = styled.div`
     }
 `;
 
-const _Group_ = ({
+const Group = ({
     name,
     color,
     links,
@@ -67,14 +67,5 @@ const _Group_ = ({
     </StyledGroup>
 );
 
-const mapStateToProps = (state, ownProps) => {
-    return {
-        links: getLinksByGroup(state, ownProps.name)
-    }
-};
-
-const Group = connect(
-    mapStateToProps
-)(_Group_);
 
 export default Group;
