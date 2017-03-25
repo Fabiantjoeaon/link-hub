@@ -5,6 +5,7 @@ import {syncHistoryWithStore, routerMiddleware} from 'react-router-redux';
 import createBrowserHistory from 'react-router/node_modules/history/lib/createBrowserHistory';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import {useRouterHistory} from 'react-router';
+import client from './apollo';
 
 import Root from './containers/Root';
 import rootReducer from './reducers';
@@ -18,11 +19,13 @@ const browserHistory = useRouterHistory(createBrowserHistory)({
 });
 const middleware = routerMiddleware(browserHistory);
 
+
 const configureStore = () => {
     return createStore(
         rootReducer,
         {},
         composeWithDevTools(
+            applyMiddleware(client.middleware()),
             applyMiddleware(middleware)
         )
     );
@@ -30,7 +33,7 @@ const configureStore = () => {
 
 const store = configureStore();
 
-export const history = syncHistoryWithStore(browserHistory, store)
+export const history = syncHistoryWithStore(browserHistory, store);
 
 ReactDOM.render(
     <Root history={history} store={store} />,
