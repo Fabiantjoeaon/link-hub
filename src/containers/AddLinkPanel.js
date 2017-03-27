@@ -1,13 +1,10 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import styled from 'styled-components';
-import {addLink} from '../actions';
 
 import bindAll from 'lodash/bindAll';
 
-import {getGroupsSortedAlphabetical} from '../reducers/groupsReducer';
 import PanelTitle from '../components/PanelTitle';
 import AddLinkForm from '../components/AddLinkForm';
+import {withCreateLink} from '../graphql/mutations';
 
 class _AddLinkPanel_ extends Component {
     constructor(props) {
@@ -17,12 +14,15 @@ class _AddLinkPanel_ extends Component {
     }
 
     _handleAddLinkSubmit(values) {
-        const {url, description, group} = values;
-        this.props.addLink(url, description, group);
-        console.log(values)
+        const {description, url, group} = values;
+        this.props.mutate({variables: {description, url, group: { name: group }}})
+            .then((res) => {
+                console.log('created link', res)
+            });
     }
 
     render() {
+        console.log(this.props.mutate)
         return (
             <div>
                 <PanelTitle>Add Link</PanelTitle>
@@ -32,12 +32,6 @@ class _AddLinkPanel_ extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({
-    groups: getGroupsSortedAlphabetical(state)
-});
+const AddLinkPanel = withCreateLink(_AddLinkPanel_);
 
-const AddLinkPanel = connect(
-    mapStateToProps,
-    {addLink}
-)(_AddLinkPanel_);
 export default AddLinkPanel;

@@ -57,7 +57,6 @@ class _BottomPanel_ extends Component {
             isBottomPanelVisible,
             bottomPanelContent,
             onNavIconClick,
-            loading,
             routing
         } = this.props;
 
