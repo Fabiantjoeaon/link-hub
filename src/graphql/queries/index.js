@@ -1,7 +1,7 @@
-import {gql} from 'react-apollo';
+import {gql, graphql} from 'react-apollo';
 import fragments from './fragments';
 
-export const getAllGroups = gql`
+const getAllGroups = gql`
     query getAllGroups {
         allGroups {
             ...fullGroup
@@ -10,10 +10,10 @@ export const getAllGroups = gql`
     ${fragments.fullGroup}
 `;
 
-export const getAllLinks = gql`
-    query getAllLinks {
-        allLinks {
-            ${fragments.fullLink}
-        }
-    }  
-`;
+export const withAllGroups = graphql(getAllGroups, {
+    props: ({ownProps, data: {loading, allGroups}}) =>
+        ({
+            loading,
+            groups: allGroups
+        })
+});

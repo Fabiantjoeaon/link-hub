@@ -6,6 +6,8 @@ import bindAll from 'lodash/bindAll';
 import * as actions from '../actions';
 import {getIsBottomPanelVisible} from '../reducers/dashboardReducer';
 import GroupList from '../components/GroupList';
+import Loading from '../components/Loading';
+import {withAllGroups} from '../graphql/queries';
 
 const StyledLinksComponent = styled.section`
     height: calc(90% - 80px);
@@ -54,7 +56,7 @@ class _LinksContainer_ extends Component {
                         onGroupMouseEnterHandler={this._onGroupMouseEnterHandler}
                         onGroupMouseLeaveHandler={this._onGroupMouseLeaveHandler}
                         {...this.props} /> :
-                    <h1>Loading</h1>
+                    <Loading/>
                 }
             </StyledLinksComponent>
         );
@@ -65,9 +67,9 @@ const mapStateToProps = (state) => ({
     isBottomPanelVisible: getIsBottomPanelVisible(state)
 });
 
-const LinksContainer = connect(
+const LinksContainer = withAllGroups(connect(
     mapStateToProps,
     actions
-)(_LinksContainer_);
+)(_LinksContainer_));
 
 export default LinksContainer;

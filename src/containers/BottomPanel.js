@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {getIsBottomPanelVisible} from '../reducers/dashboardReducer';
-import styled from 'styled-components';
-import {push} from 'react-router-redux';
-import SvgIcon from '../components/SvgIcon';
-
 import {RouteTransition} from 'react-router-transition';
+import {push} from 'react-router-redux';
+import styled from 'styled-components';
 
+import {getIsBottomPanelVisible} from '../reducers/dashboardReducer';
+import SvgIcon from '../components/SvgIcon';
 import {easeInQuad, easeOutQuint} from '../lib/cssEasings.js';
 
 const StyledBottomPanel = styled.section`
@@ -66,7 +65,6 @@ class _BottomPanel_ extends Component {
 
         return (
             <StyledBottomPanel visible={isBottomPanelVisible}>
-                {!loading ?
                 <BottomPanelContent>
                     <RouteTransition
                         pathname={pathname}
@@ -82,7 +80,7 @@ class _BottomPanel_ extends Component {
                     >
                         {bottomPanelContent}
                     </RouteTransition>
-                </BottomPanelContent> : <h1>Loading</h1>}
+                </BottomPanelContent>}
                 <BottomPanelNav>
                     <SvgIcon
                         layout='BottomPanel'

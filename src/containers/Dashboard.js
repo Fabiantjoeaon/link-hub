@@ -5,9 +5,6 @@ import {getBackgroundColor, getIsBottomPanelVisible} from '../reducers/dashboard
 import LinksContainer from './LinksContainer';
 import Toolbar from './Toolbar';
 import BottomPanel from './BottomPanel';
-import {graphql} from 'react-apollo';
-
-import {getAllGroups} from '../graphql/queries';
 
 const StyledDashboard = styled.div`
     width: 100vw;
@@ -23,7 +20,7 @@ const _Dashboard_ = ({backgroundColor, children, ...props}) => {
         <StyledDashboard backgroundColor={backgroundColor}>
             <LinksContainer {...props} />
             <Toolbar />
-            <BottomPanel {...props} bottomPanelContent={children} />
+            <BottomPanel bottomPanelContent={children} />
         </StyledDashboard>
     )
 };
@@ -33,14 +30,9 @@ const mapStateToProps = (state) => ({
     isBottomPanelVisible: getIsBottomPanelVisible(state)
 });
 
-const Dashboard = graphql(getAllGroups, {
-    props: ({ ownProps, data: { loading, allGroups} }) => ({
-        loading,
-        groups: allGroups
-    }),
-})(connect(
+const Dashboard = connect(
     mapStateToProps
-)(_Dashboard_));
+)(_Dashboard_);
 export default Dashboard;
 
 
