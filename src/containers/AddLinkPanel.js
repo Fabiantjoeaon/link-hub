@@ -14,15 +14,10 @@ class _AddLinkPanel_ extends Component {
     }
 
     _handleAddLinkSubmit(values) {
-        const {description, url, group} = values;
-        this.props.mutate({variables: {description, url, group: { name: group }}})
-            .then((res) => {
-                console.log('created link', res)
-            });
+        this.props.mutate({variables: {...values, groupId: values.group}});
     }
 
     render() {
-        console.log(this.props.mutate)
         return (
             <div>
                 <PanelTitle>Add Link</PanelTitle>

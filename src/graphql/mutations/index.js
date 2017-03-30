@@ -1,8 +1,8 @@
 import {gql, graphql} from 'react-apollo';
 
 const createLink = gql`
-    mutation createLink($description: String!, $url: String!, $group: LinkgroupGroup) {
-        createLink(description: $description, url: $url, group: $group) {
+    mutation createLink($url: String!, $description: String!, $groupId: ID!) {
+        createLink(url: $url, description: $description, groupId: $groupId) {
             id
         }
     }

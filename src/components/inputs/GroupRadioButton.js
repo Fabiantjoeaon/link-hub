@@ -73,17 +73,17 @@ export default class GroupRadioButton extends Component {
     _onLabelClick() {
         const input = ReactDOM.findDOMNode(this.input);
         input.checked = !input.checked;
-        this.props.meta.dispatch(change('addLinkForm', 'group', this.props.name))
+        this.props.meta.dispatch(change('addLinkForm', 'group', this.props.id))
     }
 
     render() {
-        const {color, name} = this.props;
+        const {id, color, name} = this.props;
         return (
             <StyledGroupRadioContainer>
                 <StyledGroupRadioButton
                     defaultChecked={name == 'Uncategorized'}
                     ref={input => this.input = input}
-                    name='group' type='radio' value={name}/>
+                    name='group' type='radio' value={id}/>
                 <StyledGroupRadioLabel
                     onClick={() => {this._onLabelClick()}}
                     color={color}>{name}</StyledGroupRadioLabel>

@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 import {DropTarget} from 'react-dnd';
 
 import GroupLinksList from '../components/GroupLinksList';
-import {getLinksByGroup} from '../reducers/linksReducer';
 
 const StyledGroup = styled.div`
     width: calc((100% / 4) - 10px * 2);
