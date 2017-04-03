@@ -24,6 +24,7 @@ const _AddLinkForm_ = ({
         <TextInput label='Description' name='description'/>
         {!loading ?
             <Field name='group' onChange={handleOnSelectChange} component='select'>
+                <option>Select a group: </option>
                 {groups.map((group) => (
                     <option key={group.id} value={group.id}>{group.name}</option>
                 ))}

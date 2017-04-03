@@ -1,7 +1,7 @@
 import {gql, graphql} from 'react-apollo';
 import fragments from './fragments';
 
-const getAllGroups = gql`
+export const getAllGroups = gql`
     query getAllGroups {
         allGroups {
             ...fullGroup

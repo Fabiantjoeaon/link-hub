@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import PanelTitle from '../components/PanelTitle';
 import AddLinkForm from '../components/AddLinkForm';
 import {withCreateLink} from '../graphql/mutations';
+import {getAllGroups} from '../graphql/queries';
 
 class _AddLinkPanel_ extends Component {
     constructor(props) {
@@ -13,7 +14,7 @@ class _AddLinkPanel_ extends Component {
 
         bindAll(this, '_handleAddLinkSubmit', '_handleOnSelectChange');
 
-        this.state = { group: '' }
+        this.state = {group: ''}
     }
 
     _handleOnSelectChange(e) {
@@ -22,7 +23,13 @@ class _AddLinkPanel_ extends Component {
 
     _handleAddLinkSubmit(values) {
         return new Promise((resolve, reject) => {
-            resolve(this.props.mutate({variables: {...values, groupId: this.state.group}}));
+            resolve(this.props.mutate(
+                {
+                    variables: {...values, group: this.state.group},
+                    refetchQueries: [{
+                        query: getAllGroups
+                    }]
+                }));
         }).then(() => {
             this.props.resetForm('addLinkForm');
         }).catch((e) => {

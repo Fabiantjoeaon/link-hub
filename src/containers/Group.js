@@ -62,7 +62,7 @@ const Group = ({
         color={color}>
         <h1>{name}</h1>
         <span>{links.length}</span>
-        <GroupLinksList links={links} />
+        <GroupLinksList color={color} links={links} />
     </StyledGroup>
 );
 
