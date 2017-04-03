@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const StyledGroupLinksList = styled.ul`
     margin: 0;
-    margin-top: 30px;
+    margin-top: 10px;
     padding-left: 0px;
     width: 100%;
     display: block;

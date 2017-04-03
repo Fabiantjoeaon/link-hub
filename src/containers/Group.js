@@ -20,7 +20,7 @@ const StyledGroup = styled.div`
         max-width: 60% !important;
         background-color: #ffffff;
         
-        h1, span, li {
+        h1, span, li, a {
             color: #646464 !important;
         }
     }
