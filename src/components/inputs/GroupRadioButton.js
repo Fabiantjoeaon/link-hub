@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import {change} from 'redux-form';
 
-
 const StyledGroupRadioContainer = styled.div`
    display: inline-block;
    padding: 2.5px;

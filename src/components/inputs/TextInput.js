@@ -7,8 +7,8 @@ import bindAll from 'lodash/bindAll';
 const StyledTextInputContainer = styled.div`
     display: block;
     overflow: hidden;
-    max-width: 757px;
-    width: 757px;
+    max-width: 500px;
+    width: 500px;
     position: relative;
     height: 60px;
     line-height: 60px;
@@ -23,21 +23,19 @@ const StyledField = styled(Field)`
     right: 100%;
     padding: 0px 20px;
     background-color: #fff;
-    width: 70%;
+    width: 60%;
     height: 100%;
     border:none;
     background-image:none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
     box-shadow: none;
     font-weight: 100;
     transition: transform 0.6s 0.1s cubic-bezier(0.19, 1, 0.22, 1);
     
     &:focus, &.active {
         outline: 0;
-        transform: translate3d(529px, 0px, 0px);
+        transform: translate3d(300px, 0px, 0px);
         + label {
-           transform: translate3d(60%, 0%, 0%);
+           transform: translate3d(40%, 0%, 0%);
            
            span {
                 opacity: 0;
