@@ -6,23 +6,27 @@ import {connect} from 'react-redux';
 import PanelTitle from '../components/PanelTitle';
 import AddLinkForm from '../components/AddLinkForm';
 import {withCreateLink} from '../graphql/mutations';
-import {setNotification, setError} from '../actions'
 
 class _AddLinkPanel_ extends Component {
     constructor(props) {
         super(props);
 
-        bindAll(this, '_handleAddLinkSubmit');
+        bindAll(this, '_handleAddLinkSubmit', '_handleOnSelectChange');
+
+        this.state = { group: '' }
+    }
+
+    _handleOnSelectChange(e) {
+        this.setState({group: e.target.value});
     }
 
     _handleAddLinkSubmit(values) {
         return new Promise((resolve, reject) => {
-            resolve(this.props.mutate({variables: {...values, groupId: values.group}}));
+            resolve(this.props.mutate({variables: {...values, groupId: this.state.group}}));
         }).then(() => {
-            this.props.setNotification(`Added link ${values.description}`);
             this.props.resetForm('addLinkForm');
         }).catch((e) => {
-            this.props.setError(e);
+            console.log(e)
         });
     }
 
@@ -30,7 +34,8 @@ class _AddLinkPanel_ extends Component {
         return (
             <div>
                 <PanelTitle>Add Link</PanelTitle>
-                <AddLinkForm handleAddLinkSubmit={this._handleAddLinkSubmit} {...this.props} />
+                <AddLinkForm handleOnSelectChange={this._handleOnSelectChange}
+                             handleAddLinkSubmit={this._handleAddLinkSubmit} {...this.props} />
             </div>
         )
     }
@@ -39,6 +44,6 @@ class _AddLinkPanel_ extends Component {
 const mapStateToProps = (state) => ({state});
 
 const AddLinkPanel = withCreateLink(
-    connect(mapStateToProps, {resetForm: reset, setError, setNotification})(_AddLinkPanel_));
+    connect(mapStateToProps, {resetForm: reset})(_AddLinkPanel_));
 
 export default AddLinkPanel;

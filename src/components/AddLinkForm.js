@@ -10,23 +10,10 @@ const StyledAddLinkForm = styled.form`
     width: 100%;
 `;
 
-const GroupSelector = styled(Field)`
-    display: inline-block;
-    width: 100%;
-    height: 150px;
-`;
-
-const renderGroups = ({groups, ...props}) => (
-    <div>
-        {groups.map(group =>
-            <GroupRadioButton {...props} key={group.id} {...group} />
-        )}
-    </div>
-)
-
 const _AddLinkForm_ = ({
     handleSubmit,
     handleAddLinkSubmit,
+    handleOnSelectChange,
     pristine,
     submitting,
     groups,
@@ -36,7 +23,11 @@ const _AddLinkForm_ = ({
         <TextInput label='URL' name='url'/>
         <TextInput label='Description' name='description'/>
         {!loading ?
-            <GroupSelector name='group' groups={groups} component={renderGroups}/> :
+            <Field name='group' onChange={handleOnSelectChange} component='select'>
+                {groups.map((group) => (
+                    <option key={group.id} value={group.id}>{group.name}</option>
+                ))}
+            </Field> :
             <Loading/>
         }
         <div>

@@ -13,7 +13,7 @@ const StyledGroupLinksList = styled.ul`
 const GroupLinksList = ({links}) => (
     <StyledGroupLinksList>
         {links.map(link =>
-            <Link key={link.id} {...link} />
+            <Link id={link.id} key={link.id} {...link} />
         )}
     </StyledGroupLinksList>
 );

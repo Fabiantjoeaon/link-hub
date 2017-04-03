@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import {withDeleteLink} from '../graphql/mutations';
 
 const StyledLink = styled.li`
     list-style-type: none;
@@ -19,8 +20,10 @@ const StyledLink = styled.li`
     }
 `;
 
-const Link = ({ url, description }) => (
-    <StyledLink><a target="_blank" href={url}>{description}</a></StyledLink>
+const Link = ({ id, url, description, mutate }) => (
+    <StyledLink><a target="_blank" href={url}>{description}</a>
+        <span onClick={() => mutate({variables: {id}})}>DELETE</span>
+    </StyledLink>
 );
 
-export default Link;
+export default withDeleteLink(Link);

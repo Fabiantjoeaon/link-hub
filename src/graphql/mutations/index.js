@@ -8,4 +8,13 @@ const createLink = gql`
     }
 `;
 
+const deleteLink = gql`
+    mutation deleteLink($id: ID!) {
+        deleteLink(id: $id) {
+            id
+        }
+    }
+`;
+
 export const withCreateLink = graphql(createLink);
+export const withDeleteLink = graphql(deleteLink);

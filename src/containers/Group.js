@@ -6,7 +6,7 @@ import {DropTarget} from 'react-dnd';
 import GroupLinksList from '../components/GroupLinksList';
 
 const StyledGroup = styled.div`
-    width: calc((100% / 4) - 10px * 2);
+    min-width: calc((100% / 4) - 10px * 2);
     border-radius: 5px;
     background-color: ${props => props.color};
     height: calc(20em - 10px * 2);
