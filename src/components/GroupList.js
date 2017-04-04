@@ -20,6 +20,7 @@ const GroupList = ({ groups, links, visible, ...props}) => (
     <StyledGroupList visible={visible}>
         {groups.map(group =>
             <Group
+                groupId={group.id}
                 key={group.id}
                 {...group}
                 {...props} />

@@ -10,10 +10,10 @@ const StyledGroupLinksList = styled.ul`
     display: block;
 `;
 
-const GroupLinksList = ({color, links}) => (
+const GroupLinksList = ({links, ...props}) => (
     <StyledGroupLinksList>
         {links.map(link =>
-            <Link id={link.id} color={color} key={link.id} {...link} />
+            <Link id={link.id} key={link.id} {...props} {...link} />
         )}
     </StyledGroupLinksList>
 );

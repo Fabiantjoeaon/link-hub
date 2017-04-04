@@ -1,4 +1,5 @@
 import {gql, graphql} from 'react-apollo';
+import {getAllGroups, getAllLinksForGroup} from '../queries';
 
 const createLink = gql`
     mutation createLink($url: String!, $description: String!, $group: ID!) {
@@ -16,5 +17,21 @@ const deleteLink = gql`
     }
 `;
 
-export const withCreateLink = graphql(createLink);
-export const withDeleteLink = graphql(deleteLink);
+export const withCreateLink = graphql(createLink, {
+    options: {
+        refetchQueries: [{
+            query: getAllGroups
+        }]
+    }
+});
+
+export const withDeleteLink = graphql(deleteLink, {
+    options: (props) => ({
+        refetchQueries: [{
+            query: getAllLinksForGroup,
+            variables: {
+                groupId: props.id
+            }
+        }]
+    })
+});

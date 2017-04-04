@@ -17,3 +17,16 @@ export const withAllGroups = graphql(getAllGroups, {
             groups: allGroups
         })
 });
+
+export const getAllLinksForGroup = gql`
+    query getAllLinksForGroup($groupId: ID!) {
+        allLinks(filter: {
+            group: {
+                id: $groupId
+            }
+        }) {
+            url,
+            description
+        }
+    }
+`;

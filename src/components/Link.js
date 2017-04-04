@@ -27,6 +27,11 @@ const StyledLink = styled.li`
         
     }
     
+    img {
+        width: 16px;
+        height: 16px;
+    }
+    
     span {
         font-size: 0.7em !important;
         color: #${props => props.color};
@@ -36,11 +41,12 @@ const StyledLink = styled.li`
     }
 `;
 
-const Link = ({ id, color, url, description, mutate }) => (
+const Link = ({id, color, url, description, mutate, groupId}) => (
     <StyledLink>
-        <img src={`http://www.google.com/s2/favicons?domain=${url}`} />
+        <img src={`http://www.google.com/s2/favicons?domain=${url}`}/>
         <a target="_blank" href={url}>{description}</a>
-        <span color={color} onClick={() => mutate({variables: {id}})}>X</span>
+        <span color={color} id={groupId} onClick={() => mutate({variables: {id}})}
+        >X</span>
     </StyledLink>
 );
 

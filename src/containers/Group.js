@@ -7,6 +7,7 @@ import GroupLinksList from '../components/GroupLinksList';
 
 const StyledGroup = styled.div`
     min-width: calc((100% / 4) - 10px * 2);
+    max-width: calc((100% / 4) - 10px * 2);
     border-radius: 5px;
     background-color: ${props => props.color};
     height: calc(20em - 10px * 2);
@@ -50,6 +51,7 @@ const StyledGroup = styled.div`
 `;
 
 const Group = ({
+    id,
     name,
     color,
     links,
@@ -62,7 +64,7 @@ const Group = ({
         color={color}>
         <h1>{name}</h1>
         <span>{links.length}</span>
-        <GroupLinksList color={color} links={links} />
+        <GroupLinksList groupId={id} color={color} links={links} />
     </StyledGroup>
 );
 

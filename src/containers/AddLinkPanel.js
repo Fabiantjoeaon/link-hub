@@ -6,7 +6,6 @@ import {connect} from 'react-redux';
 import PanelTitle from '../components/PanelTitle';
 import AddLinkForm from '../components/AddLinkForm';
 import {withCreateLink} from '../graphql/mutations';
-import {getAllGroups} from '../graphql/queries';
 
 class _AddLinkPanel_ extends Component {
     constructor(props) {
@@ -25,10 +24,7 @@ class _AddLinkPanel_ extends Component {
         return new Promise((resolve, reject) => {
             resolve(this.props.mutate(
                 {
-                    variables: {...values, group: this.state.group},
-                    refetchQueries: [{
-                        query: getAllGroups
-                    }]
+                    variables: {...values, group: this.state.group}
                 }));
         }).then(() => {
             this.props.resetForm('addLinkForm');
