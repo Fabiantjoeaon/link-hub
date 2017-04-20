@@ -12,7 +12,7 @@ import {withAllGroups} from '../graphql/queries';
 const StyledLinksComponent = styled.section`
     height: calc(90% - 80px);
     width: calc(100% - 80px);
-    padding: 40px 40px;
+    padding: 20px 20px;
     margin: 0 auto;
 `;
 

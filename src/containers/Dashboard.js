@@ -12,7 +12,7 @@ const StyledDashboard = styled.div`
     max-height: 100vh;
     perspective: 200px;
     background-color: #${props => props.backgroundColor};
-    transition: all 2s cubic-bezier(0.19, 1, 0.22, 1);
+    transition: all 0.8s cubic-bezier(0.785, 0.135, 0.15, 0.86);
 `;
 
 const _Dashboard_ = ({backgroundColor, children, ...props}) => {

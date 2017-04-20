@@ -19,23 +19,21 @@ const StyledBottomPanel = styled.section`
     height: ${props => props.visible ? '570px' : '0px'};
     transform: ${props => props.visible ? 'translate3d(0px, 0px, 0px)' : 'translate3d(0px, 570px, 0px)'};
     will-change: transform;
+    display: flex;
+    flex-direction: row;
 `;
 
 const BottomPanelContent = styled.div`
-    width: 70%;
+    width: 95%;
     height: 100%;
-    margin: 0 auto;
-    padding: 40px 40px;
     box-sizing: border-box;
     background-color: #fff;
 `;
 
 const BottomPanelNav = styled.div`
-    width: 20%;
-    height: 80%;
-    position:absolute;
-    right: -10%;
-    top: 10%; 
+    width: 5%;
+    height: 100%;
+    
 `;
 
 const AddLinkIcon = () => (
@@ -79,7 +77,7 @@ class _BottomPanel_ extends Component {
                     >
                         {bottomPanelContent}
                     </RouteTransition>
-                </BottomPanelContent>}
+                </BottomPanelContent>
                 <BottomPanelNav>
                     <SvgIcon
                         layout='BottomPanel'

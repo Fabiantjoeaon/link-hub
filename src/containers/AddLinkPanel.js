@@ -3,20 +3,52 @@ import React, {Component} from 'react';
 import bindAll from 'lodash/bindAll';
 import {reset} from 'redux-form';
 import {connect} from 'react-redux';
+import styled from 'styled-components';
 import PanelTitle from '../components/PanelTitle';
 import AddLinkForm from '../components/AddLinkForm';
+import AddGroupForm from '../components/AddGroupForm';
 import {withCreateLink} from '../graphql/mutations';
+
+const CreateContainer = styled.div`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: row no-wrap;
+`;
+
+const AddLinkContainer = styled.div`
+    width: 50%;
+    height: 100%;
+    background-color: #89B6A5;
+    padding-left: 30px;
+    
+    transition: all 0.6s cubic-bezier(0.19, 1, 0.4, 1);
+    &:hover {
+        background-color: #709D8C;
+    }
+`;
+const AddGroupContainer = styled.div`
+    width: 50%;
+    background-color: #D7B49E;
+    height: 100%;
+    padding-left: 30px;
+    
+    transition: all 0.6s cubic-bezier(0.19, 1, 0.4, 1);
+    &:hover {
+        background-color: #BE9B85;
+    }
+`;
 
 class _AddLinkPanel_ extends Component {
     constructor(props) {
         super(props);
 
-        bindAll(this, '_handleAddLinkSubmit', '_handleOnSelectChange');
+        bindAll(this, '_handleAddLinkSubmit', '_handleOnGroupSelectChange');
 
         this.state = {group: ''}
     }
 
-    _handleOnSelectChange(e) {
+    _handleOnGroupSelectChange(e) {
         this.setState({group: e.target.value});
     }
 
@@ -35,11 +67,23 @@ class _AddLinkPanel_ extends Component {
 
     render() {
         return (
-            <div>
-                <PanelTitle>Add Link</PanelTitle>
-                <AddLinkForm handleOnSelectChange={this._handleOnSelectChange}
-                             handleAddLinkSubmit={this._handleAddLinkSubmit} {...this.props} />
-            </div>
+            <CreateContainer>
+                <AddLinkContainer>
+                    <PanelTitle
+                        title="Add Link"
+                        subtitle="Add your bookmark to a new group"
+                    />
+                    <AddLinkForm handleOnSelectChange={this._handleOnGroupSelectChange}
+                                 handleAddLinkSubmit={this._handleAddLinkSubmit} {...this.props} />
+                </AddLinkContainer>
+                <AddGroupContainer>
+                    <PanelTitle
+                        title="Add Group"
+                        subtitle="Add a new group to save bookmarks in"
+                    />
+                    <AddGroupForm />
+                </AddGroupContainer>
+            </CreateContainer>
         )
     }
 }

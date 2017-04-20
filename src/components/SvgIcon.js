@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import {easeOutQuart} from '../lib/cssEasings';
 
 const StyledSVGIcon = styled.div`
-    border-radius: 50%;
     cursor: pointer;
     will-change: transform;
 `;
