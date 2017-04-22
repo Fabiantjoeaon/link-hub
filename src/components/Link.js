@@ -6,6 +6,12 @@ import colorLuminance from '../lib/colorLuminance';
 
 const StyledLink = styled.tr `
     background-color: ${props => props.linkBackgroundColor};
+    transition: background-color 0.3s ease-out;
+
+    &:hover {
+        background-color: ${props => props.onLinkHoverBackgroundColor};
+    }
+
     td {        
         padding: 10px 0px;   
         white-space: nowrap;
@@ -66,15 +72,14 @@ const Link = ({
     mutate,
     groupId
 }) => {
-    const darkerColor1 = colorLuminance(color, -0.1);
-    const darkerColor2 = colorLuminance(color, -0.125);
-    const linkBackgroundColor = i % 2 == 0 ? darkerColor1 : darkerColor2; 
+    const darkColor = colorLuminance(color, -0.1);
+    const darkerColor = colorLuminance(color, -0.2);
     return (
-        <StyledLink linkBackgroundColor={linkBackgroundColor}>
+        <StyledLink linkBackgroundColor={darkColor} onLinkHoverBackgroundColor={darkerColor}>
             <StyledImage>
                 <img src={`http://www.google.com/s2/favicons?domain=${url}`} />
             </StyledImage>
-            <StyledNameAndUrl color={darkerColor1}>
+            <StyledNameAndUrl>
                 <a target="_blank" href={url}>{description}</a>
                 <small>{url}</small>
             </StyledNameAndUrl>
