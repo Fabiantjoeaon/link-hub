@@ -45,6 +45,7 @@ const ColorPickerWrapper = styled.div`
     display: flex;
     flex-flow: row wrap;
 `;
+
 const Color = styled.div`
     background-color: #${props => props.color};
     width: 25%;

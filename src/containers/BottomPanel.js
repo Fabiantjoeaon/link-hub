@@ -14,7 +14,7 @@ const StyledBottomPanel = styled.section`
     position: fixed;
     bottom:0;
     right:0;
-    z-index: 2;
+    z-index: 4;
     transition: all ${props => props.visible ? `0.5s 0.5s ${easeOutQuint}` : `0.3s 0.1s ${easeInQuad}`} 
     height: ${props => props.visible ? '570px' : '0px'};
     transform: ${props => props.visible ? 'translate3d(0px, 0px, 0px)' : 'translate3d(0px, 570px, 0px)'};
@@ -28,12 +28,12 @@ const BottomPanelContent = styled.div`
     height: 100%;
     box-sizing: border-box;
     background-color: #fff;
+    
 `;
 
 const BottomPanelNav = styled.div`
     width: 5%;
     height: 100%;
-    
 `;
 
 const AddLinkIcon = () => (

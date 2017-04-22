@@ -19,23 +19,23 @@ const CreateContainer = styled.div`
 const AddLinkContainer = styled.div`
     width: 50%;
     height: 100%;
-    background-color: #89B6A5;
+    background-color: #959595;
     padding-left: 30px;
     
     transition: all 0.6s cubic-bezier(0.19, 1, 0.4, 1);
     &:hover {
-        background-color: #709D8C;
+        background-color: #8fbaeb;
     }
 `;
 const AddGroupContainer = styled.div`
     width: 50%;
-    background-color: #D7B49E;
+    background-color: #959595;
     height: 100%;
     padding-left: 30px;
     
     transition: all 0.6s cubic-bezier(0.19, 1, 0.4, 1);
     &:hover {
-        background-color: #BE9B85;
+        background-color: #8fbaeb;
     }
 `;
 

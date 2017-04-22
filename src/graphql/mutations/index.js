@@ -24,15 +24,11 @@ const deleteLink = gql `
     }
 `;
 
-// export const withCreateLink = graphql(createLink, {     options: {
-// refetchQueries: [{             query: getAllGroups         }]     } });
-
 export const withCreateLink = graphql(createLink, {
     // Mutate normally gets passed as prop to wrapped component
     props({ownProps, mutate}) {
         return {
-            // But for updating the store we're actually hijacking mutate to a custom
-            // function
+            // But for updating the store we're actually hijacking mutate to a custom function        
             createLink(url, description, group) {
                 return mutate({
                     variables: {
@@ -41,13 +37,11 @@ export const withCreateLink = graphql(createLink, {
                         group
                     },
                     updateQueries: {
-                        getAllLinksForGroup: (prev, {mutationResult}) => {
+                        getAllGroups: (prev, {mutationResult}) => {
                             const newLink = mutationResult.data.createLink;
                             return update(prev, {
                                 allGroups: {
-                                    links: {
-                                        $push: [newLink]
-                                    }
+                                    $push: [newLink]
                                 }
                             })
                         }

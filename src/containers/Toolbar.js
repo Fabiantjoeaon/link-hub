@@ -39,24 +39,16 @@ const AddLinkIcon = () => (
 
 )
 
-class _Toolbar_ extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        return (
+const _Toolbar_ = (props) => (
             <StyledToolbar>
                 <ToolbarIcon
                     layout='Toolbar'
                     path={'/add_link'}
-                    {...this.props}>
+                    {...props}>
                     <AddLinkIcon/>
                 </ToolbarIcon>
             </StyledToolbar>
-        )
-    }
-}
+);
 
 const mapStateToProps = (state, ownProps) => ({
     isBottomPanelVisible: getIsBottomPanelVisible(state),
