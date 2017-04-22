@@ -25,6 +25,7 @@ export const getAllLinksForGroup = gql`
                 id: $groupId
             }
         }) {
+            id,
             url,
             description
         }

@@ -54,10 +54,7 @@ class _AddLinkPanel_ extends Component {
 
     _handleAddLinkSubmit(values) {
         return new Promise((resolve, reject) => {
-            resolve(this.props.mutate(
-                {
-                    variables: {...values, group: this.state.group}
-                }));
+            resolve(this.props.createLink(values.url, values.description, this.state.group))
         }).then(() => {
             this.props.resetForm('addLinkForm');
         }).catch((e) => {
