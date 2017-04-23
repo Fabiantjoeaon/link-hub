@@ -1,8 +1,6 @@
 import {gql, graphql} from 'react-apollo';
-import update from 'immutability-helper';
-import {getAllGroups, getAllLinks} from '../queries';
+import {getAllGroups} from '../queries';
 
-// TODO: Link fragment
 const createLink = gql `
     mutation createLink($url: String!, $description: String!, $group: ID!) {
         createLink(url: $url, description: $description, groupId: $group) {
@@ -17,23 +15,9 @@ const createLink = gql `
     }
 `;
 
-const deleteLink = gql `
-    mutation deleteLink($id: ID!) {
-        deleteLink(id: $id) {
-            __typename,
-            id,
-            group {
-                id
-            }
-        }
-    }
-`;
-
-export const withCreateLink = graphql(createLink, {
-    // Mutate normally gets passed as prop to wrapped component
+const withCreateLink = graphql(createLink, {
     props({ownProps, mutate}) {
         return {
-            // But for updating the store we're actually hijacking mutate to a custom function        
             createLink(url, description, group) {
                 return mutate({
                     variables: {
@@ -73,4 +57,4 @@ export const withCreateLink = graphql(createLink, {
     }
 });
 
-export const withDeleteLink = graphql(deleteLink);
+export default withCreateLink;

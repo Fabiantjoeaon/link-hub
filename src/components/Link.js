@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {withDeleteLink} from '../graphql/mutations';
+import withDeleteLink from '../graphql/mutations/deleteLink';
 
 import colorLuminance from '../lib/colorLuminance';
 
@@ -64,13 +64,14 @@ const StyledNameAndUrl = styled.td `
 `;
 
 const Link = ({
-    i,
+    groupIterator,
     id,
     color,
     url,
     description,
     mutate,
-    groupId
+    groupId,
+    deleteLink
 }) => {
     const darkColor = colorLuminance(color, -0.05);
     const darkerColor = colorLuminance(color, -0.2);
@@ -83,12 +84,8 @@ const Link = ({
                 <a target="_blank" href={url}>{description}</a>
                 <small>{url}</small>
             </StyledNameAndUrl>
-            <td>
-                <span
-                    id={groupId}
-                    onClick={() => mutate({variables: {
-                        id
-                    }})}>X</span>
+            <td onClick={() => deleteLink(id)}>
+                <span id={groupId}>X</span>
             </td>
         </StyledLink>
     )

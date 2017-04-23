@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import PanelTitle from '../components/PanelTitle';
 import AddLinkForm from '../components/AddLinkForm';
 import AddGroupForm from '../components/AddGroupForm';
-import {withCreateLink} from '../graphql/mutations';
+import withCreateLink from '../graphql/mutations/createLink';
 
 const CreateContainer = styled.div`
     width: 100%;
