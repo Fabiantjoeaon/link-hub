@@ -8,7 +8,10 @@ const createGroup = gql`
             id,
             name,
             description,
-            color
+            color,
+            links {
+                id
+            }
         }
     }
 `;
