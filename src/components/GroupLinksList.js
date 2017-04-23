@@ -2,19 +2,29 @@ import React from 'react';
 import Link from './Link';
 import styled from 'styled-components';
 
-const StyledGroupLinksList = styled.table`
+const StyledGroupLinksListContainer = styled.div `
+    height: 68%;
     margin: 0 auto;
+    overflow: auto;
     width: 85%;
+    position: relative;
 `;
 
-const GroupLinksList = ({links, ...props}) => (
-    <StyledGroupLinksList cellspacing="0" cellpadding="0">
-    <tbody>
-        {links.map((link, i) =>
-            <Link id={link.id} i={i} key={link.id} {...props} {...link} />
-        )}
-        </tbody>
-    </StyledGroupLinksList>
+const StyledGroupLinksList = styled.table `
+    width: 100%;
+`;
+
+const GroupLinksList = ({
+    links,
+    ...props
+}) => (
+    <StyledGroupLinksListContainer>
+        <StyledGroupLinksList cellspacing="0" cellpadding="0">
+            <tbody>
+                {links.map(link => <Link id={link.id} key={link.id} {...props} {...link}/>)}
+            </tbody>
+        </StyledGroupLinksList>
+    </StyledGroupLinksListContainer>
 );
 
 export default GroupLinksList;

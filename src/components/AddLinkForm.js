@@ -25,7 +25,7 @@ const _AddLinkForm_ = ({
     <StyledAddLinkForm onSubmit={handleSubmit(handleAddLinkSubmit)}>
         <TextInput label='URL' name='url'/>
         <TextInput label='Description' name='description'/>
-        {!loading ?
+        {!loading && groups ?
             <div>
                 <TextInputLabel for='group'>Group: </TextInputLabel>
                 <StyledGroupSelect name='group' onChange={handleOnSelectChange} component='select'>

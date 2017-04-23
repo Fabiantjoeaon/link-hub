@@ -46,11 +46,11 @@ class _LinksContainer_ extends Component {
     }
 
     render() {
-        const {isBottomPanelVisible, loading} = this.props;
+        const {isBottomPanelVisible, loading, groups} = this.props;
         return (
             <StyledLinksComponent>
                 <GroupListOverlay visible={isBottomPanelVisible} />
-                {!loading ?
+                {!loading && groups ?
                     <GroupList
                         visible={isBottomPanelVisible}
                         onGroupMouseEnterHandler={this._onGroupMouseEnterHandler}

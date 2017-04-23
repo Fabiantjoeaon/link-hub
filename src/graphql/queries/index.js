@@ -10,6 +10,15 @@ export const getAllGroups = gql`
     ${fragments.fullGroup}
 `;
 
+export const getAllLinks = gql`
+    query getAllLinks {
+        allLinks {
+            ...fullLink
+        }
+    }
+    ${fragments.fullLink}
+`;
+
 export const withAllGroups = graphql(getAllGroups, {
     props: ({ownProps, data: {loading, allGroups}}) =>
         ({

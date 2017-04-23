@@ -72,7 +72,7 @@ const Link = ({
     mutate,
     groupId
 }) => {
-    const darkColor = colorLuminance(color, -0.1);
+    const darkColor = colorLuminance(color, -0.05);
     const darkerColor = colorLuminance(color, -0.2);
     return (
         <StyledLink linkBackgroundColor={darkColor} onLinkHoverBackgroundColor={darkerColor}>

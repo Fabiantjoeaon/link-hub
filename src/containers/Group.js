@@ -69,7 +69,7 @@ const Group = ({
         onMouseLeave={() => {onGroupMouseLeaveHandler()}}
         color={color}>
         <h1>{name}</h1>
-        <GroupLinksList groupId={id} color={color} links={links} />
+        <GroupLinksList groupId={id} color={color} links={links ? links : []} />
     </StyledGroup>
 );
 
