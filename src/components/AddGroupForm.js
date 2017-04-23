@@ -11,20 +11,21 @@ const StyledAddGroupForm = styled.form`
 `;
 
 const _AddGroupForm_ = ({
+    handleOnColorSelectChange,
     handleSubmit,
-    handleAddLinkSubmit,
-    handleOnSelectChange,
+    handleAddGroupSubmit,
     pristine,
     submitting,
     loading
 }) => (
-    <StyledAddGroupForm>
+    <StyledAddGroupForm onSubmit={handleSubmit(handleAddGroupSubmit)}>
         <TextInput label='Name' name='name'/>
         <TextInput label='Description' name='description'/>
         <div>
             <TextInputLabel>Color</TextInputLabel>
-            <ColorPicker />
+            <ColorPicker handleChange={handleOnColorSelectChange} />
         </div>
+        <button type="submit" disabled={pristine || submitting}>Submit</button>
     </StyledAddGroupForm>
 );
 

@@ -1,6 +1,7 @@
 import {gql, graphql} from 'react-apollo';
 import {getAllGroups} from '../queries';
 
+//TODO: Fragment here
 const createLink = gql `
     mutation createLink($url: String!, $description: String!, $group: ID!) {
         createLink(url: $url, description: $description, groupId: $group) {

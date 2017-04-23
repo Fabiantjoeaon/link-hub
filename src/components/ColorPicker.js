@@ -78,10 +78,10 @@ const ColorText = styled.span`
 `;
 
 //onClick change redux form value
-const ColorPicker = ({props}) => (
+const ColorPicker = ({handleChange}) => (
     <ColorPickerWrapper>
         {colors.map(({name, color}) =>
-            <Color key={color} color={color} darkerColor={colorLuminance(color, -0.1)}>
+            <Color key={color} color={color} onClick={() => {handleChange(color)}} darkerColor={colorLuminance(color, -0.1)}>
                 <ColorText color={color} darkerColor={colorLuminance(color, -0.2)}>{name}</ColorText>
             </Color>
         )}

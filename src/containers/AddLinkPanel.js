@@ -8,6 +8,7 @@ import PanelTitle from '../components/PanelTitle';
 import AddLinkForm from '../components/AddLinkForm';
 import AddGroupForm from '../components/AddGroupForm';
 import withCreateLink from '../graphql/mutations/createLink';
+import withCreateGroup from '../graphql/mutations/createGroup';
 
 const CreateContainer = styled.div`
     width: 100%;
@@ -43,13 +44,22 @@ class _AddLinkPanel_ extends Component {
     constructor(props) {
         super(props);
 
-        bindAll(this, '_handleAddLinkSubmit', '_handleOnGroupSelectChange');
+        bindAll(
+            this, 
+            '_handleAddLinkSubmit', 
+            '_handleOnGroupSelectChange', 
+            '_handleOnColorSelectChange',
+            '_handleAddGroupSubmit');
 
-        this.state = {group: ''}
+        this.state = {group: '', color: ''};
     }
 
     _handleOnGroupSelectChange(e) {
         this.setState({group: e.target.value});
+    }
+
+    _handleOnColorSelectChange(color) {
+        this.setState({color});
     }
 
     _handleAddLinkSubmit(values) {
@@ -57,6 +67,16 @@ class _AddLinkPanel_ extends Component {
             resolve(this.props.createLink(values.url, values.description, this.state.group))
         }).then(() => {
             this.props.resetForm('addLinkForm');
+        }).catch((e) => {
+            console.log(e)
+        });
+    }
+
+    _handleAddGroupSubmit(values) {
+        return new Promise((resolve, reject) => {
+            resolve(this.props.createGroup(values.name, values.description, this.state.color))
+        }).then(() => {
+            this.props.resetForm('addGroupForm');
         }).catch((e) => {
             console.log(e)
         });
@@ -78,7 +98,8 @@ class _AddLinkPanel_ extends Component {
                         title="Add Group"
                         subtitle="Add a new group to save bookmarks in"
                     />
-                    <AddGroupForm />
+                    <AddGroupForm handleOnColorSelectChange={this._handleOnColorSelectChange}
+                                  handleAddGroupSubmit={this._handleAddGroupSubmit} />
                 </AddGroupContainer>
             </CreateContainer>
         )
@@ -87,7 +108,7 @@ class _AddLinkPanel_ extends Component {
 
 const mapStateToProps = (state) => ({state});
 
-const AddLinkPanel = withCreateLink(
-    connect(mapStateToProps, {resetForm: reset})(_AddLinkPanel_));
+const AddLinkPanel = withCreateGroup(withCreateLink(
+    connect(mapStateToProps, {resetForm: reset})(_AddLinkPanel_)));
 
 export default AddLinkPanel;

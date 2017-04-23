@@ -26,10 +26,11 @@ const withDeleteLink = graphql(deleteLink, {
                     updateQueries: {
                         getAllGroups: (prev, {mutationResult}) => {
                             // [].concat.apply([], array) to flatten multidimensional array
-                            const linksIdList = []
+                            const deleteIndex = []
                                 .concat
-                                .apply([], prev.allGroups.map(g => g.links.map(l => l.id)));
-                            const deleteIndex = findIndex(linksIdList, (i) => i == id);
+                                .apply([], prev.allGroups.map(g => g.links.map(l => l.id)))
+                                .indexOf(id);
+
                             if (deleteIndex < 0) 
                                 return prev;
                             

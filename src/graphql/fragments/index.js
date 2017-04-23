@@ -5,7 +5,10 @@ const fullLink = gql`
         id,
         url,
         description,
-        createdAt
+        createdAt,
+        group {
+            id
+        }
     }
 `;
 
