@@ -20,8 +20,8 @@ const StyledGroup = styled.div`
     }
 
     @media(max-width: 630px) {
-        min-width: calc((100% / 1) - 8px * 2);
-        max-width: calc((100% / 1) - 8px * 2);
+        min-width: calc((100% / 1) - 8px * 1);
+        max-width: calc((100% / 1) - 8px * 1);
     }
 
     background-color: ${props => props.color};

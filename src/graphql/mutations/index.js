@@ -2,10 +2,13 @@ import {gql, graphql} from 'react-apollo';
 import update from 'immutability-helper';
 import {getAllGroups, getAllLinksForGroup} from '../queries';
 
+// TODO: Link fragment
 const createLink = gql `
     mutation createLink($url: String!, $description: String!, $group: ID!) {
         createLink(url: $url, description: $description, groupId: $group) {
             id,
+            url,
+            description,
             group {
                 id
             }
@@ -36,12 +39,24 @@ export const withCreateLink = graphql(createLink, {
                         description,
                         group
                     },
+                    optimisticResponse: {
+                        createLink: {
+                            id: -1,
+                            url,
+                            description,
+                            group: {
+                                id: group
+                            }
+                        }
+                    },
                     updateQueries: {
                         getAllGroups: (prev, {mutationResult}) => {
                             const newLink = mutationResult.data.createLink;
                             return update(prev, {
                                 allGroups: {
-                                    $push: [newLink]
+                                    links: {
+                                        $push: [newLink]
+                                    }
                                 }
                             })
                         }
