@@ -1,44 +1,10 @@
-import React from 'react';
+import React, {Component} from 'react';
 import styled from 'styled-components';
 
+import colors from '../lib/colors';
 import colorLuminance from '../lib/colorLuminance';
 
-const colors = [
-    {
-        name: 'Spanish Pink',
-        color: 'EBBAB9',
-    },
-    {
-        name: 'Teal Deer',
-        color: '91F5AD'
-    },
-    {
-        name: 'Mellow Apricot',
-        color: 'FBBA72'
-    },
-    {
-        name: 'Electric Lavender',
-        color: 'EDC9FF'
-    },
-    {
-        name: 'Light Khaki',
-        color: 'D5E68D'
-    },
-    {
-        name: 'Isabelline',
-        color: 'EFEFF0'
-    },
-    {
-        name: 'Pale Chestnut',
-        color: 'E4B1AB'
-    },
-    {
-        name: 'Wild Blue Yonder',
-        color: '9CADCE'
-    }
-];
-
-const ColorPickerWrapper = styled.div`
+const ColorPickerWrapper = styled.div `
     width: 460px;
     height: 150px;
     background-color: #fff;
@@ -46,7 +12,7 @@ const ColorPickerWrapper = styled.div`
     flex-flow: row wrap;
 `;
 
-const Color = styled.div`
+const Color = styled.div `
     background-color: #${props => props.color};
     width: 25%;
     height: 50%;
@@ -55,8 +21,8 @@ const Color = styled.div`
     justify-content: center;
     transition: all 0.3s ease-out;
     cursor: pointer;
-    
-    &:hover {
+
+    &:hover, &.active {
         background-color: ${props => props.darkerColor};
         
         span {
@@ -65,7 +31,7 @@ const Color = styled.div`
     }
 `;
 
-const ColorText = styled.span`
+const ColorText = styled.span `
         display: block;
         color: ${props => props.darkerColor};
         max-width: 60%;
@@ -78,14 +44,20 @@ const ColorText = styled.span`
 `;
 
 //onClick change redux form value
-const ColorPicker = ({handleChange}) => (
-    <ColorPickerWrapper>
-        {colors.map(({name, color}) =>
-            <Color key={color} color={color} onClick={() => {handleChange(color)}} darkerColor={colorLuminance(color, -0.1)}>
-                <ColorText color={color} darkerColor={colorLuminance(color, -0.2)}>{name}</ColorText>
-            </Color>
-        )}
-    </ColorPickerWrapper>
+// TODO TODO TODOget current color from parent prop
+const ColorPicker = ({handleChange, currentColor}) => (
+            <ColorPickerWrapper>
+                {colors.map(({name, color}) => 
+                    <Color
+                        key={color}
+                        className={currentColor == color ? 'active' : null}
+                        color={color}
+                        onClick={() => {handleChange(color)}}
+                        darkerColor={colorLuminance(color, -0.1)}>
+                        <ColorText color={color} darkerColor={colorLuminance(color, -0.2)}>{name}</ColorText>
+                    </Color>
+                )}
+            </ColorPickerWrapper>
 );
 
 export default ColorPicker;

@@ -98,7 +98,7 @@ class _AddLinkPanel_ extends Component {
                         title="Add Group"
                         subtitle="Add a new group to save bookmarks in"
                     />
-                    <AddGroupForm handleOnColorSelectChange={this._handleOnColorSelectChange}
+                    <AddGroupForm color={this.state.color} handleOnColorSelectChange={this._handleOnColorSelectChange}
                                   handleAddGroupSubmit={this._handleAddGroupSubmit} />
                 </AddGroupContainer>
             </CreateContainer>
