@@ -41,7 +41,7 @@ const withCreateLink = graphql(createLink, {
                     update: (proxy, mutationResult) => {
                         const query = getAllGroups;
                         const data = proxy.readQuery({query});
-                        console.log(data.allGroups);
+                        
                         data.allGroups.map((groupData) => {
                             if(groupData.id == group)
                                 groupData.links.push(mutationResult.data.createLink);

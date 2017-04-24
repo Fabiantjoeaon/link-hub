@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {DropTarget} from 'react-dnd';
 
 import GroupLinksList from '../components/GroupLinksList';
+import GroupSVGOverlay from '../components/GroupSVGOverlay';
 
 const StyledGroup = styled.div`
     min-width: calc((100% / 4) - 8px * 2);
@@ -70,6 +71,7 @@ const Group = ({
         onMouseLeave={() => {onGroupMouseLeaveHandler()}}
         color={color}>
         <h1>{name}</h1>
+        <GroupSVGOverlay color={color}/>
         <GroupLinksList groupIterator={i} groupId={id} color={color} links={links ? links : []} />
     </StyledGroup>
 );

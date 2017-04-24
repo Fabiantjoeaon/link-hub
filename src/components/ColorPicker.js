@@ -43,8 +43,6 @@ const ColorText = styled.span `
         transition: all 0.3s ease-out;
 `;
 
-//onClick change redux form value
-// TODO TODO TODOget current color from parent prop
 const ColorPicker = ({handleChange, currentColor}) => (
             <ColorPickerWrapper>
                 {colors.map(({name, color}) => 
