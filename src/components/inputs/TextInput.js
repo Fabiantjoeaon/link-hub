@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import TextInputLabel from './TextInputLabel';
 
 const TextInputWrapper = styled.div`
-    margin-bottom: 70px;
+    margin-bottom: 55px;
     width: 70%;
     height: 40px;
     position: relative;

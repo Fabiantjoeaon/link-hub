@@ -10,6 +10,11 @@ const StyledGroupSVGOverlay = styled.svg`
     position: absolute;
     top: 0;
     left: 0;
+
+    path {
+        transition: stroke-dashoffset 3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+
 `;
 
 export default class GroupSVGOverlay extends Component {
@@ -38,12 +43,12 @@ export default class GroupSVGOverlay extends Component {
     }
 
     render() {
-        const {width, height} = this.state;
+        const {width, height, classNameProp} = this.state;
         const color = `#${this.props.color}`;
         const darkerColor = colorLuminance(color, -0.2);
         return (
-            <StyledGroupSVGOverlay preserveAspectRatio="xMaxYMax meet">
-                <path d={`M0 0 H${width}  V${height} H 0 L 0 0`} stroke={darkerColor} strokeWidth="6" fill="none"/>
+            <StyledGroupSVGOverlay className={classNameProp} preserveAspectRatio="xMaxYMax meet">
+                <path d={`M0 0 H${width}  V${height} H 0 L 0 0`} stroke={darkerColor} strokeWidth="3" fill="none"/>
             </StyledGroupSVGOverlay>
         )
     }

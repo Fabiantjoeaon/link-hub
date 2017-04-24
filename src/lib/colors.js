@@ -16,20 +16,20 @@ const colors = [
         color: 'EDC9FF'
     },
     {
-        name: 'Light Khaki',
-        color: 'D5E68D'
+        name: 'Magic Mint',
+        color: 'A9FBD7'
     },
     {
-        name: 'Isabelline',
-        color: 'EFEFF0'
+        name: 'Medium Slate Blue',
+        color: '8B80F9'
     },
     {
         name: 'Pale Chestnut',
         color: 'E4B1AB'
     },
     {
-        name: 'Wild Blue Yonder',
-        color: '9CADCE'
+        name: 'Maya Blue',
+        color: '6CD4FF'
     }
 ];
 

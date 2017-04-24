@@ -28,7 +28,6 @@ const BottomPanelContent = styled.div`
     height: 100%;
     box-sizing: border-box;
     background-color: #fff;
-    
 `;
 
 const BottomPanelNav = styled.div`
