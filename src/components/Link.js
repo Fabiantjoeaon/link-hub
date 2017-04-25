@@ -1,13 +1,16 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
+import {findDOMNode} from 'react-dom';
 import styled from 'styled-components';
-import withDeleteLink from '../graphql/mutations/deleteLink';
+import {DragSource} from 'react-dnd';
 
+import withDeleteLink from '../graphql/mutations/deleteLink';
 import colorLuminance from '../lib/colorLuminance';
 
 const StyledLink = styled.tr `
-    background-color: ${props => props.linkBackgroundColor};
+    background-color: ${props => props.isDragging ? '#fff' : props.linkBackgroundColor};
     transition: background-color 0.3s ease-out;
-
+    position: relative;
+    
     &:hover {
         background-color: ${props => props.onLinkHoverBackgroundColor};
     }
@@ -22,7 +25,6 @@ const StyledLink = styled.tr `
             margin: 0 auto;
             width: 100%;
             text-align: center;
-            color: 
         }
     }
 `;
@@ -43,6 +45,7 @@ const StyledNameAndUrl = styled.td `
     
     a {
         color: #fff;
+        cursor: pointer;
         font-size: 0.9em;
         font-weight: 400;
         text-decoration: none;
@@ -63,32 +66,106 @@ const StyledNameAndUrl = styled.td `
     }
 `;
 
-const Link = ({
-    groupIterator,
-    id,
-    color,
-    url,
-    description,
-    mutate,
-    groupId,
-    deleteLink
-}) => {
-    const darkColor = colorLuminance(color, -0.05);
-    const darkerColor = colorLuminance(color, -0.2);
-    return (
-        <StyledLink linkBackgroundColor={darkColor} onLinkHoverBackgroundColor={darkerColor}>
-            <StyledImage>
-                <img src={`http://www.google.com/s2/favicons?domain=${url}`} />
-            </StyledImage>
-            <StyledNameAndUrl>
-                <a target="_blank" href={url}>{description}</a>
-                <small>{url}</small>
-            </StyledNameAndUrl>
-            <td onClick={() => deleteLink(id)}>
-                <span id={groupId}>X</span>
-            </td>
-        </StyledLink>
-    )
+const DeleteLinkOverlay = styled.td`
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: ${props => props.showDelete ? 'calc('+props.height+'px - (10px * 2))' : '0px'};
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    padding: 0px;
+    background-color: #fff;
+    transition: opacity 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+    opacity: ${props => props.showDelete ? '1' : '0'};
+    overflow: hidden;
+
+    p {
+        text-align: center;
+        width: 50% !important;
+        color: #000 !important;
+        
+    }
+`;
+
+const ItemTypes = {
+    LINK: 'link'
 };
 
-export default withDeleteLink(Link);
+const linkSource = {
+    beginDrag(props) {
+        return {linkId: props.id}
+    }
+}
+
+const collect = (connect, monitor) => {
+    return {
+        connectDragSource: connect.dragSource(),
+        isDragging: monitor.isDragging()
+    }
+}
+
+class Link extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            showDelete: 0,
+            linkHeight: 0
+        }
+    }
+    componentDidMount() {
+        const node = findDOMNode(this);
+        this.setState({linkHeight: node.clientHeight});
+    }
+    render() {
+        const {
+            id,
+            color,
+            url,
+            description,
+            groupId,
+            deleteLink,
+            isDragging,
+            connectDragSource
+        } = this.props;
+
+        const {showDelete, linkHeight} = this.state;
+        const darkColor = colorLuminance(color, -0.05);
+        const darkerColor = colorLuminance(color, -0.2);
+
+        return (
+            <StyledLink
+                linkBackgroundColor={darkColor}
+                onLinkHoverBackgroundColor={darkerColor}
+                showDelete={showDelete}
+                isDragging={isDragging}>
+                <StyledImage>
+                    <img src={`http://www.google.com/s2/favicons?domain=${url}`}/>
+                </StyledImage>
+                <StyledNameAndUrl>
+                    <a target="_blank" href={url}>{description}</a>
+                    <small>{url}</small>
+                </StyledNameAndUrl>
+                <td ref={instance => connectDragSource(findDOMNode(instance))}
+                    onClick={() => { this.setState({showDelete: 1}) }}>
+                    <span>+</span>
+                </td>
+                <DeleteLinkOverlay 
+                    showDelete={showDelete}
+                    height={linkHeight}>
+                    <p onClick={() => deleteLink(id)}>Delete</p>
+                    <p onClick={() => this.setState({showDelete: 0})}>Never mind</p>
+                </DeleteLinkOverlay>
+            </StyledLink>
+        )
+    }
+}
+
+Link.propTypes = {
+    connectDragSource: PropTypes.func.isRequired,
+    isDragging: PropTypes.bool.isRequired
+}
+
+export default withDeleteLink(DragSource(ItemTypes.LINK, linkSource, collect)(Link));

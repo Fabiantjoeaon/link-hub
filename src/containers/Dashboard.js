@@ -1,6 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
+import {DragDropContext} from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 import {getBackgroundColor, getIsBottomPanelVisible} from '../reducers/dashboardReducer';
 import LinksContainer from './LinksContainer';
 import Toolbar from './Toolbar';
@@ -31,7 +33,8 @@ const mapStateToProps = (state) => ({
 
 const Dashboard = connect(
     mapStateToProps
-)(_Dashboard_);
+)(DragDropContext(HTML5Backend)(_Dashboard_));
+
 export default Dashboard;
 
 
