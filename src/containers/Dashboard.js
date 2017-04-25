@@ -8,8 +8,7 @@ import BottomPanel from './BottomPanel';
 
 const StyledDashboard = styled.div`
     width: 100vw;
-    height: 100vh;
-    max-height: 100vh;
+    min-height: 100vh;
     perspective: 200px;
     background-color: #${props => props.backgroundColor};
     transition: all 0.8s cubic-bezier(0.785, 0.135, 0.15, 0.86);

@@ -15,7 +15,7 @@ const StyledToolbar = styled.section`
     right: 0;
     margin: 0 auto;
     display: flex;
-    flex-flow: row no-wrap;
+    flex-flow: row nowrap;
     padding:0px 20px 25px 20px;
     justify-content: flex-start;
 `;

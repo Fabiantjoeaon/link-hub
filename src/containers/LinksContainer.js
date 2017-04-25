@@ -10,7 +10,7 @@ import Loading from '../components/Loading';
 import {withAllGroups} from '../graphql/queries';
 
 const StyledLinksComponent = styled.section`
-    height: calc(90% - 80px);
+    height: auto;
     width: calc(100% - 80px);
     padding: 20px 20px;
     margin: 0 auto;
@@ -18,7 +18,7 @@ const StyledLinksComponent = styled.section`
 
 const GroupListOverlay = styled.div`
     width: 100vw;
-    height: 100vh;
+    height: auto;
     background-color: rgba(0,0,0,0.6);
     position:absolute;
     top:0;
