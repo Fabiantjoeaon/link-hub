@@ -1,22 +1,14 @@
-import React, {Component} from 'react';
-import styled, {keyframes} from 'styled-components';
+import React, {Component, PropTypes} from 'react';
+import {findDOMNode} from 'react-dom';
+import styled from 'styled-components';
 import {connect} from 'react-redux';
 import {DropTarget} from 'react-dnd';
+import colorLuminance from '../lib/colorLuminance';
 
 import GroupLinksList from '../components/GroupLinksList';
 import GroupSVGOverlay from '../components/GroupSVGOverlay';
 
-const dashIn = keyframes `
-	to {
-		stroke-dashoffset: 0;
-	}
-`;
-
-const dashOut = keyframes `
-	to {
-		stroke-dashoffset: 10000;
-	}
-`;
+import {ItemTypes} from '../components/Link';
 
 const StyledGroup = styled.div `
     min-width: calc((100% / 4) - 8px * 2);
@@ -83,14 +75,37 @@ const StyledGroup = styled.div `
 
     svg {
         path {
-            stroke-dashoffset: ${props => props.hovered ? '0' : '10000'};
+            stroke-dashoffset: ${props => props.hovered
+    ? '0'
+    : '10000'};
             stroke-dasharray: 10000;
             will-change: stroke-dashoffset;
         }
     }
 `;
 
-export default class Group extends Component {
+const MoveAndDeleteNotice = styled.p `
+    color: ${props => props.color} !important;
+    opacity: ${props => props.hovered ? '1' : '0'};
+    transition: opacity 0.5s ease-out;
+    will-change: opacity;
+    padding-bottom: 10px;
+`;
+
+const groupTarget = {
+    drop(props, monitor) {
+        console.log(props, monitor);
+    }
+}
+
+const collect = (connect, monitor) => {
+    return {
+        connectDropTarget: connect.dropTarget(),
+        isOver: monitor.isOver()
+    };
+}
+
+class Group extends Component {
     constructor(props) {
         super(props);
 
@@ -108,22 +123,24 @@ export default class Group extends Component {
             description,
             links,
             onGroupMouseEnterHandler,
-            onGroupMouseLeaveHandler
+            onGroupMouseLeaveHandler,
+            connectDropTarget,
+            isOver
         } = this.props;
 
         return (
             <StyledGroup
+                ref={instance => connectDropTarget(findDOMNode(instance))}
                 onMouseEnter={() => {
-                    onGroupMouseEnterHandler(color);
-                    this.setState({ hovered: 1 })
-                }}
+                onGroupMouseEnterHandler(color);
+                this.setState({hovered: 1})
+            }}
                 onMouseLeave={() => {
-                    onGroupMouseLeaveHandler();
-                    this.setState({ hovered: 0 })
-                }}
+                onGroupMouseLeaveHandler();
+                this.setState({hovered: 0})
+            }}
                 color={color}
-                hovered={this.state.hovered}
-                >
+                hovered={this.state.hovered}>
                 <h1>{name}</h1>
                 <p>{description}</p>
                 <GroupSVGOverlay color={color}/>
@@ -133,8 +150,26 @@ export default class Group extends Component {
                     color={color}
                     links={links
                     ? links
-                    : []}/>
+                    : []}/> 
+                {links.length > 0 ? 
+                    <MoveAndDeleteNotice 
+                        hovered={this.state.hovered}
+                        color={colorLuminance(color, -0.2)}>
+                        Drag 
+                        <b> +</b>,   
+                        or click 
+                        <b> + </b> 
+                        to delete
+                    </MoveAndDeleteNotice>
+                : null}
             </StyledGroup>
         )
     }
+};
+
+Group.propTypes = {
+    isOver: PropTypes.bool.isRequired,
+    connectDropTarget: PropTypes.func.isRequired
 }
+
+export default DropTarget(ItemTypes.LINK, groupTarget, collect)(Group);

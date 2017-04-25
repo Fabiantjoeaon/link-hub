@@ -16,6 +16,7 @@ const StyledLink = styled.tr `
     }
 
     td {        
+        position: relative;
         padding: 10px 0px;   
         white-space: nowrap;
         span {
@@ -66,30 +67,30 @@ const StyledNameAndUrl = styled.td `
     }
 `;
 
-const DeleteLinkOverlay = styled.td`
+const DeleteLinkOverlay = styled.div`
     position: absolute;
     top: 0;
     right: 0;
-    width: 100%;
-    height: ${props => props.showDelete ? 'calc('+props.height+'px - (10px * 2))' : '0px'};
-    display: flex;
+    width: ${props => props.width} !important;
+    height: 100%;
+    display:${props => props.showDelete ? 'flex' : 'none'};
     flex-flow: row nowrap;
     justify-content: space-between;
     padding: 0px;
     background-color: #fff;
     transition: opacity 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
-    opacity: ${props => props.showDelete ? '1' : '0'};
-    overflow: hidden;
 
     p {
+        font-size: 0.5em;
+        margin: 0 !important;
         text-align: center;
-        width: 50% !important;
+        height: 100%;
+        width: 50%;
         color: #000 !important;
-        
     }
 `;
 
-const ItemTypes = {
+export const ItemTypes = {
     LINK: 'link'
 };
 
@@ -112,12 +113,13 @@ class Link extends React.Component {
 
         this.state = {
             showDelete: 0,
-            linkHeight: 0
+            linkWidth: 0
         }
     }
+
     componentDidMount() {
         const node = findDOMNode(this);
-        this.setState({linkHeight: node.clientHeight});
+        this.setState({linkWidth: node.clientWidth});
     }
     render() {
         const {
@@ -131,7 +133,7 @@ class Link extends React.Component {
             connectDragSource
         } = this.props;
 
-        const {showDelete, linkHeight} = this.state;
+        const {showDelete, linkWidth} = this.state;
         const darkColor = colorLuminance(color, -0.05);
         const darkerColor = colorLuminance(color, -0.2);
 
@@ -149,15 +151,15 @@ class Link extends React.Component {
                     <small>{url}</small>
                 </StyledNameAndUrl>
                 <td ref={instance => connectDragSource(findDOMNode(instance))}
-                    onClick={() => { this.setState({showDelete: 1}) }}>
+                    onClick={() => { this.setState({showDelete: !showDelete}) }}>
                     <span>+</span>
+                    <DeleteLinkOverlay 
+                        showDelete={showDelete}
+                        width={linkWidth}>
+                        <p onClick={() => deleteLink(id)}>Delete</p>
+                        <p onClick={() => this.setState({showDelete: !showDelete})}>Never mind</p>
+                    </DeleteLinkOverlay>
                 </td>
-                <DeleteLinkOverlay 
-                    showDelete={showDelete}
-                    height={linkHeight}>
-                    <p onClick={() => deleteLink(id)}>Delete</p>
-                    <p onClick={() => this.setState({showDelete: 0})}>Never mind</p>
-                </DeleteLinkOverlay>
             </StyledLink>
         )
     }
