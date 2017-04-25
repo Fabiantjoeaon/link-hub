@@ -93,8 +93,14 @@ const MoveAndDeleteNotice = styled.p `
 `;
 
 const groupTarget = {
-    drop(props, monitor) {
-        console.log(props, monitor);
+    drop(props, monitor, component) {
+        if(monitor.didDrop()) {
+            return
+        }
+
+        const {linkId} = monitor.getItem();
+        console.log(props);
+
     }
 }
 

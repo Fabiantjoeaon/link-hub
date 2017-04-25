@@ -7,7 +7,9 @@ import withDeleteLink from '../graphql/mutations/deleteLink';
 import colorLuminance from '../lib/colorLuminance';
 
 const StyledLink = styled.tr `
-    background-color: ${props => props.isDragging ? '#fff' : props.linkBackgroundColor};
+    background-color: ${props => props.isDragging
+    ? '#fff'
+    : props.linkBackgroundColor};
     transition: background-color 0.3s ease-out;
     position: relative;
     
@@ -67,26 +69,35 @@ const StyledNameAndUrl = styled.td `
     }
 `;
 
-const DeleteLinkOverlay = styled.div`
+const DeleteLinkOverlay = styled.div `
     position: absolute;
     top: 0;
     right: 0;
     width: ${props => props.width} !important;
     height: 100%;
-    display:${props => props.showDelete ? 'flex' : 'none'};
+    display:${props => props.showDelete
+    ? 'flex'
+    : 'none'};
     flex-flow: row nowrap;
     justify-content: space-between;
+    line-height: 100%;
     padding: 0px;
-    background-color: #fff;
+    overflow: hidden;
     transition: opacity 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
 
-    p {
-        font-size: 0.5em;
-        margin: 0 !important;
-        text-align: center;
+    p { 
+        font-size: 0.7em;
+        margin: 0 auto !important;
+        text-align: center !important;
+        padding-top: 15px;
         height: 100%;
         width: 50%;
-        color: #000 !important;
+        color: #fff !important;
+        background-color: ${props => props.color};
+        transition: background-color 0.3s ease-out;
+        &:hover {
+            background-color: ${props => props.hoverColor};
+        }
     }
 `;
 
@@ -97,6 +108,11 @@ export const ItemTypes = {
 const linkSource = {
     beginDrag(props) {
         return {linkId: props.id}
+    },
+    endDrag(props, monitor) {
+        if (!monitor.didDrop()) {
+            return;
+        }
     }
 }
 
@@ -150,14 +166,24 @@ class Link extends React.Component {
                     <a target="_blank" href={url}>{description}</a>
                     <small>{url}</small>
                 </StyledNameAndUrl>
-                <td ref={instance => connectDragSource(findDOMNode(instance))}
-                    onClick={() => { this.setState({showDelete: !showDelete}) }}>
+                <td
+                    ref={instance => connectDragSource(findDOMNode(instance))}
+                    onClick={() => {
+                    this.setState({
+                        showDelete: !showDelete
+                    })
+                }}>
                     <span>+</span>
-                    <DeleteLinkOverlay 
+                    <DeleteLinkOverlay
+                        color={darkerColor}
+                        hoverColor={colorLuminance(color, -0.4)}
                         showDelete={showDelete}
                         width={linkWidth}>
                         <p onClick={() => deleteLink(id)}>Delete</p>
-                        <p onClick={() => this.setState({showDelete: !showDelete})}>Never mind</p>
+                        <p
+                            onClick={() => this.setState({
+                            showDelete: !showDelete
+                        })}>Never mind</p>
                     </DeleteLinkOverlay>
                 </td>
             </StyledLink>
