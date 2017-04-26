@@ -32,25 +32,24 @@ const withCreateLink = graphql(createLink, {
                             id: -1,
                             url,
                             description,
-                            createdAt: +new Date,
+                            createdAt: + new Date,
                             group: {
                                 id: group
                             }
                         }
                     },
+                    fragments: [],
                     update: (proxy, mutationResult) => {
                         const query = getAllGroups;
                         const data = proxy.readQuery({query});
-                        
-                        data.allGroups.map((groupData) => {
-                            if(groupData.id == group)
-                                groupData.links.push(mutationResult.data.createLink);
-                        });
 
-                        proxy.writeQuery({
-                            query,
-                            data
-                        })
+                        data.allGroups.map((groupData) => {
+                                if (groupData.id == group) 
+                                    groupData.links.push(mutationResult.data.createLink);
+                                }
+                            );
+
+                        proxy.writeQuery({query, data})
                     }
                 })
             }

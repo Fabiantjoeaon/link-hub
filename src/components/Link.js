@@ -107,7 +107,10 @@ export const ItemTypes = {
 
 const linkSource = {
     beginDrag(props) {
-        return {linkId: props.id}
+        return {
+            linkId: props.id,
+            prevGroup: props.groupId
+        }
     },
     endDrag(props, monitor) {
         if (!monitor.didDrop()) {

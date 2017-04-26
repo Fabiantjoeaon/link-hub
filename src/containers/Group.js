@@ -8,7 +8,7 @@ import colorLuminance from '../lib/colorLuminance';
 import GroupLinksList from '../components/GroupLinksList';
 import GroupSVGOverlay from '../components/GroupSVGOverlay';
 import {ItemTypes} from '../components/Link';
-import withUpdateLink from '../graphql/mutations/updateLink';
+import withMoveLinkToGroup from '../graphql/mutations/updateLink';
 
 const StyledGroup = styled.div `
     min-width: calc((100% / 4) - 8px * 2);
@@ -98,13 +98,8 @@ const groupTarget = {
             return
         }
 
-        const {linkId} = monitor.getItem();
-        props.mutate({
-            variables: {
-                id: linkId,
-                group: props.id
-            }
-        });
+        const {linkId, prevGroup} = monitor.getItem();
+        props.moveLinkToGroup(linkId, props.id, prevGroup);
     }
 }
 
@@ -182,4 +177,4 @@ Group.propTypes = {
     connectDropTarget: PropTypes.func.isRequired
 }
 
-export default withUpdateLink(DropTarget(ItemTypes.LINK, groupTarget, collect)(Group));
+export default withMoveLinkToGroup(DropTarget(ItemTypes.LINK, groupTarget, collect)(Group));

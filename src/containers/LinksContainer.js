@@ -18,7 +18,7 @@ const StyledLinksComponent = styled.section`
 
 const GroupListOverlay = styled.div`
     width: 100vw;
-    height: auto;
+    height: 100vh;
     background-color: rgba(0,0,0,0.6);
     position:absolute;
     top:0;
