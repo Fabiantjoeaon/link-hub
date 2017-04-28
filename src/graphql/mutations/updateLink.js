@@ -6,9 +6,10 @@ const moveLinkToGroup = gql `
         updateLink(id: $id, groupId: $group) {
             __typename,
             id,
+            url,
+            description,
             group {
-                id,
-                name
+                id
             }
         }
     }
@@ -17,38 +18,35 @@ const moveLinkToGroup = gql `
 const withMoveLinkToGroup = graphql(moveLinkToGroup, {
     props({ownProps, mutate}) {
         return {
-            moveLinkToGroup(id, group, prevGroup) {
+            moveLinkToGroup(id, newGroup, prevGroup) {
                 return mutate({
                     variables: {
                         id,
-                        group
+                        group: newGroup
                     },
                     optimisticResponse: {
-                        __typename: 'Link',
                         id,
                         group: {
-                            id: group
-                        }
+                            id: newGroup
+                        },
+                        __typename: 'Link',
                     },
                     fragments: [],
-                    update: (proxy, mutationResult) => {
+                    update: (proxy, { data: { updateLink }}) => {
                         const query = getAllGroups;
                         const data = proxy.readQuery({query});
-
-                        // TODO: This can be simpler?
+                        
                         data.allGroups.map(groupData => {
                             // Remove link from previous group
-                            if (groupData.id == prevGroup) {
+                            if (groupData.id == prevGroup) 
                                 groupData.links.map((link, i) => {
                                     if (link.id == id) 
                                         groupData.links.splice(i, 1);
                                 })
-                            }
-
+                            
                             // Add link to new group
-                            if (groupData.id == group) {
-                                groupData.links.push(mutationResult.data.updateLink);
-                            }
+                            if (groupData.id == newGroup) 
+                                groupData.links.push(updateLink);
                         });
 
                         proxy.writeQuery({

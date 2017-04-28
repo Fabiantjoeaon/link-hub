@@ -7,6 +7,7 @@ import colorLuminance from '../lib/colorLuminance';
 
 import GroupLinksList from '../components/GroupLinksList';
 import GroupSVGOverlay from '../components/GroupSVGOverlay';
+import GroupToolbar from '../components/GroupToolbar.js';
 import {ItemTypes} from '../components/Link';
 import withMoveLinkToGroup from '../graphql/mutations/updateLink';
 
@@ -75,9 +76,7 @@ const StyledGroup = styled.div `
 
     svg {
         path {
-            stroke-dashoffset: ${props => props.hovered
-    ? '0'
-    : '10000'};
+            stroke-dashoffset: ${props => props.hovered ? '0' : '10000'};
             stroke-dasharray: 10000;
             will-change: stroke-dashoffset;
         }
@@ -149,6 +148,10 @@ class Group extends Component {
                 <h1>{name}</h1>
                 <p>{description}</p>
                 <GroupSVGOverlay color={color}/>
+                <GroupToolbar 
+                    id={id}
+                    hovered={this.state.hovered}
+                    color={colorLuminance(color, -0.25)} />
                 <GroupLinksList
                     groupIterator={i}
                     groupId={id}
